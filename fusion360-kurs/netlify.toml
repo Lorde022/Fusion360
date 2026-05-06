@@ -1,0 +1,26 @@
+# Netlify configuration for the Fusion 360 course
+# No build step required – pure static site.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Friendly URLs: /module/1-grundlagen/1-was-ist-cad → real .html
+[[redirects]]
+  from = "/module/:m/:l"
+  to = "/module/:m/:l.html"
+  status = 200
+  force = false

@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Top-Down vs. Bottom-Up · Modul 5, Lektion 3 · Fusion 360 Kurs</title>
+  <meta name="description" content="Konstruktionsstrategien in Fusion 360: Top-Down (Master-Sketch) versus Bottom-Up – wann welche?" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="top-down"
+             data-module="5-baugruppen"
+             data-lesson-index="3">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 5</span> ›
+        Lektion 3
+      </p>
+      <h1 class="lesson__title">Top-Down vs. Bottom-Up Konstruktion</h1>
+      <p class="lesson__meta">
+        <span>⏱ 40 Minuten</span>
+        <span>🎯 Baugruppen</span>
+        <span>🧠 Konstruktionsstrategie</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich kenne die <strong>zwei Grundstrategien</strong>: Top-Down und Bottom-Up.</li>
+          <li>Ich nutze einen <strong>Master-Sketch</strong>, aus dem mehrere Bauteile abgeleitet werden.</li>
+          <li>Ich verstehe, was eine <strong>externe Referenz</strong> in Fusion bedeutet und wie sie aktualisiert wird.</li>
+          <li>Ich entscheide bewusst, welche Strategie zu welchem Projekt passt.</li>
+          <li>Ich kenne die typischen Fallstricke jeder Strategie.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Wie hast du das Wandregal in Modul 4.7 konstruiert?</summary>
+          <div class="qa__body">Eher Bottom-Up: jedes Bauteil einzeln modelliert, anschließend zur Baugruppe zusammengefügt. Die meisten Maße waren Component-spezifisch.</div>
+        </details>
+        <details class="qa">
+          <summary>Was wäre der Vorteil, wenn alle Bauteile aus <em>einer</em> zentralen Skizze kämen?</summary>
+          <div class="qa__body">Ein einziger Master ändert alle Bauteile gleichzeitig. Wird das Regal 200 mm breiter, müssten alle Bauteile manuell angepasst werden – Top-Down erledigt das automatisch.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Bottom-Up</h3>
+        <p>
+          Klassischer Ansatz: jedes Bauteil als eigene Component konstruieren, zum Schluss zusammensetzen.
+        </p>
+        <ul>
+          <li><strong>Vorteile</strong>: Bauteile sind eigenständig und in anderen Projekten wiederverwendbar (perfekt für Standardteile, Modul 5.1). Workflow ist intuitiv.</li>
+          <li><strong>Nachteile</strong>: Maßabhängigkeiten zwischen Bauteilen müssen manuell synchron gehalten werden. Wenn sich die Außenmaße ändern, ist Nachpflegen aufwendig.</li>
+        </ul>
+
+        <h3>Top-Down</h3>
+        <p>
+          Du startest mit einer <strong>Master-Skizze</strong> oder einem <strong>Skelett</strong>, das die zentralen Maße der Baugruppe definiert. Aus diesem Skelett leiten alle Bauteile ihre Geometrie ab.
+        </p>
+        <ul>
+          <li><strong>Vorteile</strong>: alle Bauteile bleiben automatisch konsistent. Eine Maßänderung im Master propagiert in alle Components.</li>
+          <li><strong>Nachteile</strong>: höhere Initialkosten (Master sauber bauen). Bauteile sind weniger eigenständig nutzbar.</li>
+        </ul>
+
+        <h3>Kombination – „Skeleton + reuseable parts"</h3>
+        <p>
+          In der Praxis macht oft eine Mischung Sinn:
+        </p>
+        <ul>
+          <li>Korpus per Top-Down aus einem Master.</li>
+          <li>Standardteile (Schrauben, Beschläge, Druckteile) per Bottom-Up als externe Components.</li>
+        </ul>
+
+        <h3>Master-Sketch in Fusion</h3>
+        <p>
+          Es gibt mehrere Wege:
+        </p>
+        <ol>
+          <li><strong>Eine Skizze auf Top-Component-Ebene</strong>, sichtbar für alle Sub-Components. Sub-Components <em>projizieren</em> Master-Geometrie in eigene Skizzen.</li>
+          <li><strong>User-Parameter im Master</strong>, die alle Components nutzen. Eigentlich schon ein Top-Down-Element.</li>
+          <li><strong>Skeleton-Component</strong>: eigene Component „<em>Skeleton</em>" mit Hilfsbody/Sketch, andere Components referenzieren ihn.</li>
+        </ol>
+
+        <h3>Externe Referenzen</h3>
+        <p>
+          Wenn ein Bauteil Geometrie aus einer anderen Component projiziert (Sketch → Project), entsteht eine <strong>Referenz</strong>. Im Browser zeigt ein kleines Symbol an, dass diese Skizze nicht mehr unabhängig ist.
+        </p>
+        <p>
+          Ändert sich die Original-Geometrie, ist die Skizze <em>out of date</em>. Über <em>Update</em> (oben in der Toolbar oder Browser-Rechtsklick) frischst du die Referenz auf.
+        </p>
+
+        <div class="callout callout--note">
+          <strong>Faustregel</strong>
+          Familienähnliche Bauteile, die gemeinsam wachsen sollen → Top-Down. Eigenständige Bauteile, die in vielen Projekten wandern → Bottom-Up.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – Wandregal mit Master-Sketch</h2>
+        <p>Wir konstruieren das Wandregal aus 4.7 als Top-Down-Variante.</p>
+
+        <ol class="steps">
+          <li>
+            <strong>Neues Design.</strong> <code>Lektion-5-3-Wandregal-TopDown</code>.
+          </li>
+
+          <li>
+            <strong>Parameter wie zuvor.</strong> Den Block aus 4.7 übernehmen.
+          </li>
+
+          <li>
+            <strong>Master-Sketch.</strong> Auf der XZ-Ebene eine Skizze: Rechteck mit <code>regal_b × regal_h</code>, zentriert. Innere Linien einzeichnen, die die Bauteilgrenzen repräsentieren:
+            <ul>
+              <li>Senkrechte Linien für linke und rechte Innenseite (Abstand <code>brett_dicke</code> von der Außenkante).</li>
+              <li>Waagerechte Linie für die Bodenoberkante (Höhe <code>regal_h - brett_dicke</code> vom unteren Rand der Außenkontur, je nach Konstruktion).</li>
+              <li>Senkrechte Linie für die Vorderkante des Cleat-Bereichs.</li>
+            </ul>
+            Skizze schließen. Sie liegt in der Top-Level-Component, damit alle Sub-Components sie sehen.
+          </li>
+
+          <li>
+            <strong>Sub-Components anlegen.</strong> <em>Boden</em>, <em>Seite-links</em>, <em>Seite-rechts</em>, <em>Rueckwand</em>.
+          </li>
+
+          <li>
+            <strong>Boden aus Master ableiten.</strong>
+            Aktivieren: <em>Boden</em>. Skizze auf XY (auf Bodenhöhe). Sketch → <em>Project</em> wählt Linien aus dem Master, die die Boden-Außenkontur ergeben.
+            Skizze schließen, extrudieren <code>brett_dicke</code> nach oben.
+          </li>
+
+          <li>
+            <strong>Seite-links aus Master ableiten.</strong>
+            Aktivieren: <em>Seite-links</em>. Skizze auf YZ (auf der linken Außenseite). Project: Senkrechte Linie aus Master + Höhe.
+            Skizze schließen, extrudieren <code>brett_dicke</code> nach links.
+          </li>
+
+          <li>
+            <strong>Seite-rechts und Rueckwand</strong> analog – jeweils mit Project aus Master.
+          </li>
+
+          <li>
+            <strong>Test der Top-Down-Logik.</strong> Modify → Change Parameters: <code>regal_b</code> auf 800 mm. Wenn Master sauber ist, ändern sich alle Components automatisch.
+            Falls eine Component nicht aktualisiert: Update klicken.
+          </li>
+
+          <li>
+            <strong>Vergleich zur Bottom-Up-Variante.</strong> Öffne <code>Lektion-4-7-Wandregal</code> parallel. Setze dort denselben Parameter auf 800 mm. Beobachte, ob alle Components automatisch mitziehen oder manuelle Korrektur nötig ist.
+          </li>
+
+          <li>
+            <strong>Speichern.</strong>
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Ein Wandregal, das aus einem zentralen Master-Sketch alle Bauteile ableitet. Eine Maßänderung am Master wirkt sich auf alle Components aus.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Skeleton-Component</h2>
+        <p>
+          Variante: erzeuge eine eigene Component <code>Skeleton</code> mit dem Master-Sketch und ggf. einem dünnen Hilfsbody. Andere Components referenzieren diese Component statt des Top-Levels.
+        </p>
+        <ul>
+          <li>Vorteil: Skeleton lässt sich ein- und ausblenden, ohne Top-Level zu beeinflussen.</li>
+          <li>Vorteil: Du kannst das Skeleton in andere Projekte kopieren.</li>
+          <li>Nachteil: eine zusätzliche Hierarchieebene.</li>
+        </ul>
+        <p><strong>Akzeptanzkriterium:</strong> Funktional gleich, Browser-Hierarchie zeigt eine eigene Skeleton-Component, alle anderen Components verweisen darauf.</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Was ist der größte Vorteil von Top-Down?</summary>
+          <div class="qa__body">Konsistenz: Eine Maßänderung im Master propagiert automatisch in alle abgeleiteten Bauteile. Kein manuelles Synchronhalten.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Wann ist Bottom-Up besser?</summary>
+          <div class="qa__body">Bei eigenständigen Bauteilen, die in mehreren Projekten wiederverwendet werden – z.&nbsp;B. Standardschrauben, eigene Beschläge, fertige Druckteile.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Was ist eine externe Referenz?</summary>
+          <div class="qa__body">Eine Geometrie, die in einer Skizze projiziert wurde, aber aus einer anderen Component oder Component-Hierarchie stammt. Sie ist nicht mehr unabhängig – Änderung am Original wirkt sich aus.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Was bedeutet <em>Update</em> im Top-Down-Workflow?</summary>
+          <div class="qa__body">Fusion regeneriert externe Referenzen. Wird der Master geändert, werden abhängige Skizzen erst nach Update neu berechnet. Standard-Setting ist meist „on save", manuell auslösbar.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Wann lohnt sich die Mischung beider Strategien?</summary>
+          <div class="qa__body">Fast immer in der Praxis. Korpus per Top-Down (eine Skizze für Außenmaße), Standardteile als externe Components (Bottom-Up) einbinden.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Pfad</th></tr></thead>
+            <tbody>
+              <tr><td>Master-Sketch in Top-Component</td><td>Top-Component aktivieren → Skizze auf gewünschter Ebene</td></tr>
+              <tr><td>Geometrie in Sub-Component projizieren</td><td>Sub-Component aktivieren → Sketch → Project</td></tr>
+              <tr><td>Externe Referenzen aktualisieren</td><td>Toolbar oben → Update, oder Browser-Rechtsklick auf Skizze → Update</td></tr>
+              <tr><td>Externe Component einfügen</td><td>Insert → Insert Derive (oder Data Panel Drag-and-drop)</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>„Project findet keine Geometrie"</em> → Master-Skizze ist in falscher Component, oder ist nicht sichtbar. Sichtbarkeit prüfen, ggf. Master in Top-Component verschieben.</li>
+            <li><em>„Modell aktualisiert nicht"</em> → externe Referenzen-Update manuell auslösen. Bei externen Components: erst die Quelldatei speichern, dann das Master-Design öffnen und Update.</li>
+            <li><em>„Master wird zu komplex"</em> → in mehrere Skizzen aufteilen (z.&nbsp;B. Front-Sketch und Top-Sketch). Zu viele Linien in einer Skizze sind schwer zu pflegen.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-7B4FC8A8-DBC2-4E63-8CA4-DC59D3EB2F12" rel="noopener">Autodesk Help: Multi-component Design Strategies</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=fusion+360+top+down+master+sketch" rel="noopener">YouTube: Top-Down mit Master-Sketch</a></li>
+        </ul>
+      </section>
+
+      <div class="callout callout--note" style="margin-top:1.5rem">
+        <strong>🎉 Modul 5 abgeschlossen</strong>
+        Du beherrschst Components, Joints und kennst beide Konstruktionsstrategien.
+        Im letzten Modul kombinieren wir alles aus dem Kurs zu einem Hybrid-Projekt: Tischlampe mit Holzfuß und gedruckter Fassungshalterung.
+      </div>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

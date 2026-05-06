@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Übungsprojekt – parametrische Kabelhalterung · Modul 2, Lektion 5 · Fusion 360 Kurs</title>
+  <meta name="description" content="Voll parametrisches Übungsprojekt: Kabelhalterung mit Tischklemme, Schlitz-Pattern und einstellbarer Anzahl." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="projekt-kabelhalter"
+             data-module="2-parametrik"
+             data-lesson-index="5">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 2</span> ›
+        Lektion 5
+      </p>
+      <h1 class="lesson__title">Übungsprojekt: parametrische Kabelhalterung</h1>
+      <p class="lesson__meta">
+        <span>⏱ 60 Minuten</span>
+        <span>🎯 Modul-Abschluss</span>
+        <span>🖨 Druckbares Ergebnis</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich kombiniere alle Modul-2-Skills (Constraints, Parameter, Construction Geometry, Patterns) zu einem vollständigen Bauteil.</li>
+          <li>Ich konstruiere eine <strong>Tischklemme</strong>, die sich an unterschiedliche Tischplattendicken anpasst.</li>
+          <li>Ich erzeuge eine <strong>parametrische Anzahl von Kabelschlitzen</strong> per Pattern.</li>
+          <li>Ich exportiere das fertige Bauteil als STL für den 3D-Druck.</li>
+          <li>Ich kenne die Stolpersteine, wenn Parameter und Patterns zusammenspielen.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Welche Funktion stellt sicher, dass nie mehr Schlitze entstehen, als reinpassen?</summary>
+          <div class="qa__body"><code>floor()</code> rundet ab. Damit ist die Lochanzahl immer eine ganze Zahl, die in die verfügbare Breite passt.</div>
+        </details>
+        <details class="qa">
+          <summary>Welcher Constraint hält den Kabelhalter sauber symmetrisch zur Mitte?</summary>
+          <div class="qa__body"><em>Symmetric</em> auf eine zentrale Skizzen-Achse oder direkt auf eine Origin-Achse, statt die Geometrie über zwei separate Maße zu definieren.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Was wir bauen</h3>
+        <p>
+          Eine Kabelhalterung, die sich auf den Schreibtischrand klemmt und mehrere Kabel führt. Aufbau:
+        </p>
+        <ul>
+          <li><strong>Klemmprofil</strong>: Querschnitt wie ein „C", greift über die Tischplatte.</li>
+          <li><strong>Kabelarm</strong>: vorne nach oben, mit mehreren Schlitzen für Kabel.</li>
+          <li><strong>Verrundungen</strong>: damit nichts kratzt und der Druck schöner wird.</li>
+        </ul>
+        <p>
+          Alles ist parametrisch: Tischplattendicke, Klemmtiefe, Anzahl und Größe der Schlitze.
+        </p>
+
+        <div class="figure">
+          [Schematisches Querschnittsbild – „C"-Profil mit oberem Schenkel auf der Tischplatte, unterem Schenkel darunter, plus seitlichem Arm mit drei Kabelschlitzen]
+        </div>
+
+        <h3>Konstruktionsstrategie</h3>
+        <ol>
+          <li>Erst Parameter festlegen, dann Geometrie.</li>
+          <li>Querschnitt einmal als 2D-Skizze, dann symmetrisch extrudieren – damit das Bauteil mittig zur Origin liegt.</li>
+          <li>Schlitze als ein Cut-Feature, dann patternen.</li>
+          <li>Verrundungen ganz am Ende.</li>
+        </ol>
+
+        <div class="callout callout--note">
+          <strong>Reihenfolge ist Strategie</strong>
+          Verrundungen vor Patterns zu setzen, kann Patterns zerstören (weil die Kanten dann nicht mehr eindeutig sind). Erst die „logische" Geometrie bauen, dann verrunden.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung</h2>
+
+        <ol class="steps">
+          <li>
+            <strong>Neues Design.</strong> <code>Lektion-2-5-Kabelhalter</code> im Projekt <em>Fusion-Kurs</em>.
+          </li>
+
+          <li>
+            <strong>Parameter anlegen.</strong>
+            <em>Modify → Change Parameters</em>:
+            <pre><code>// — Tisch —
+tisch_dicke      = 22 mm    Stärke der Tischplatte
+klemm_tiefe      = 25 mm    wie weit die Klemme greift
+
+// — Klemme —
+wand             = 4 mm     Materialstärke des Halters
+breite           = 30 mm    Breite des Halters in Tischrichtung
+
+// — Kabelarm —
+arm_hoehe        = 40 mm    Länge des Arms nach oben
+schlitz_breite   = 6 mm     Schlitzbreite (passt für ⌀5 Kabel)
+schlitz_tiefe    = 12 mm    wie tief die Schlitze in den Arm gehen
+schlitz_d        = 6 mm     Durchmesser des Schlitzendes (≥ schlitz_breite)
+schlitz_anzahl   = 3        einheitenlos
+
+// — Abgeleitet —
+arm_breite       = schlitz_anzahl * (schlitz_breite + 4 mm) + 4 mm</code></pre>
+            <em>OK</em>.
+            <div class="callout">
+              <strong>Hinweis</strong>
+              <code>arm_breite</code> ist abgeleitet: pro Schlitz wird Platz reserviert. Wenn du <code>schlitz_anzahl</code> erhöhst, wächst der Arm automatisch mit.
+            </div>
+          </li>
+
+          <li>
+            <strong>Querschnitt skizzieren – „C"-Profil.</strong> <em>Create Sketch</em> auf der <strong>YZ-Ebene</strong>.
+            Die Skizze beschreibt die Form, die wir später quer dazu (in X-Richtung) extrudieren.
+            <p>Stelle dir vor, du schaust von vorne auf den Tisch. Die Skizze sieht so aus:</p>
+            <ul>
+              <li>Ein liegendes „C", oben über die Tischplatte gestülpt.</li>
+              <li>Oberer Schenkel: Länge <code>klemm_tiefe</code>, Höhe <code>wand</code>.</li>
+              <li>Senkrechter Steg: Höhe <code>tisch_dicke + 2 * wand</code>, Breite <code>wand</code>.</li>
+              <li>Unterer Schenkel: Länge <code>klemm_tiefe</code>, Höhe <code>wand</code>.</li>
+            </ul>
+            <p>Praxis: am einfachsten ein großes Rechteck zeichnen und anschließend ein Innenrechteck rausschneiden.</p>
+          </li>
+
+          <li>
+            <strong>Außenrechteck.</strong> Auf der YZ-Ebene mit <kbd>R</kbd> ein Rechteck zeichnen.
+            Setze die <strong>linke obere Ecke auf den Origin</strong> (Coincident).
+            Bemaße: Breite (Y-Richtung) = <code>klemm_tiefe + wand</code>, Höhe (Z-Richtung) = <code>tisch_dicke + 2 * wand</code>.
+            (Das Außenrechteck ist also die Bounding Box des „C"-Querschnitts.)
+          </li>
+
+          <li>
+            <strong>Innenausschnitt.</strong> Innerhalb des Außenrechtecks ein zweites Rechteck zeichnen, das nach <em>links</em> offen sein wird.
+            Maße: Breite = <code>klemm_tiefe</code>, Höhe = <code>tisch_dicke</code>.
+            Position: an der linken Kante (Coincident), vertikal mittig (Symmetric mit Y-Achse oder Origin-Y).
+            <div class="callout">
+              <strong>Tipp</strong>
+              Wenn die Mitten-Symmetrie streikt: zeichne eine Construction-Line waagerecht durch den Origin und nutze sie als Symmetric-Achse für das Innenrechteck.
+            </div>
+          </li>
+
+          <li>
+            <strong>Innenrechteck "öffnen".</strong> Mit <kbd>T</kbd> (Trim) die linke Linie des Innenrechtecks entfernen.
+            Übrig bleibt das „C"-Profil als Außenkontur.
+            Wenn die Profilfläche nicht mehr geschlossen ist (Trim hat zu viel weggemacht), passende Linie wieder per <kbd>L</kbd> ergänzen.
+          </li>
+
+          <li>
+            <strong>Profil prüfen.</strong> Skizze schließen. Hover über die Skizze: Fusion sollte die „C"-förmige Fläche hellblau markieren. Falls nicht, Skizze nochmal öffnen und Trim/Linien korrigieren.
+          </li>
+
+          <li>
+            <strong>Klemme extrudieren.</strong> <kbd>E</kbd>, Profile = die „C"-Fläche.
+            <em>Direction</em> = <strong>Symmetric</strong>, <em>Distance</em> = <code>breite / 2</code>, Operation = New Body. <em>OK</em>.
+            Die Klemme liegt jetzt symmetrisch um die YZ-Ebene.
+          </li>
+
+          <li>
+            <strong>Vorderfläche der Klemme finden.</strong> Drehe die Ansicht (<kbd>Shift</kbd>+MMB) so, dass du die Vorderkante (in Y-Richtung) siehst – dort, wo das „C" geschlossen ist.
+            Auf diese Fläche neue Skizze (klick → <em>Create Sketch</em>).
+          </li>
+
+          <li>
+            <strong>Kabelarm-Profil.</strong> Zeichne ein Rechteck, das auf der oberen Hälfte sitzt:
+            <ul>
+              <li>Breite (X-Richtung) = <code>arm_breite</code>, Symmetric um die Origin-Z (Mittel-Achse des Bauteils).</li>
+              <li>Höhe (Z-Richtung) = <code>arm_hoehe</code>, untere Kante koinzident mit der Oberseite der Klemme.</li>
+            </ul>
+            Skizze schließen.
+          </li>
+
+          <li>
+            <strong>Kabelarm extrudieren.</strong> <kbd>E</kbd>, Distance = <code>wand</code>, Operation = Join.
+            Der Arm ragt jetzt nach vorne aus der Klemme heraus.
+          </li>
+
+          <li>
+            <strong>Erste Schlitz-Skizze.</strong> Auf die obere Schmalseite des Arms eine Skizze legen.
+            Zeichne einen <em>Slot</em> (Sketch → Create → Slot → Center to Center):
+            <ul>
+              <li>Mittelpunkte mit Symmetric an die Mitte des Arms in X-Richtung gebunden.</li>
+              <li>Slot-Länge (in Z-Richtung in den Arm hinein) = <code>schlitz_tiefe</code>.</li>
+              <li>Slot-Breite = <code>schlitz_breite</code>.</li>
+              <li>Slot-Endradius = <code>schlitz_d / 2</code>.</li>
+            </ul>
+            Skizze schließen.
+          </li>
+
+          <li>
+            <strong>Schlitz schneiden.</strong> <kbd>E</kbd>, Profile = Slot. Direction One Side, Distance = -<code>wand</code>, Operation = Cut.
+          </li>
+
+          <li>
+            <strong>Schlitze patternen.</strong> <em>Create → Pattern → Rectangular Pattern</em>.
+            <ul>
+              <li>Pattern Type: Features.</li>
+              <li>Objects: das Cut-Feature des Schlitzes.</li>
+              <li>Direction One: X-Achse (Origin).</li>
+              <li>Distribution Type: <em>Spacing</em> (Abstand zwischen zwei Instanzen).</li>
+              <li>Quantity One: <code>schlitz_anzahl</code>.</li>
+              <li>Distance One: <code>schlitz_breite + 4 mm</code>.</li>
+              <li>Direction Two leer lassen oder Quantity 1.</li>
+            </ul>
+            <em>OK</em>.
+            Wenn Schlitze versetzt liegen: Pattern editieren, ggf. <em>Symmetric</em>-Option im Pattern aktivieren, damit das Pattern mittig um die erste Instanz wächst.
+          </li>
+
+          <li>
+            <strong>Verrundungen.</strong> <kbd>F</kbd>:
+            <ul>
+              <li>Außenkanten der Klemme (oben/unten, vorne) mit Radius 1 mm.</li>
+              <li>Außenkanten des Kabelarms mit Radius 2 mm.</li>
+              <li>Schlitzöffnungen mit Radius 0,8 mm – sieht später beim Druck schöner aus.</li>
+            </ul>
+            Falls ein Fillet meckert: einzeln statt alle gleichzeitig.
+          </li>
+
+          <li>
+            <strong>Stresstest.</strong> Modify → Change Parameters:
+            <ul>
+              <li><code>tisch_dicke</code> 18 mm → 25 mm: Klemme passt sich an.</li>
+              <li><code>schlitz_anzahl</code> 3 → 5: Arm wird breiter, fünf Schlitze, alle ausgerichtet.</li>
+              <li><code>schlitz_d</code> 6 mm → 10 mm (für dickere Kabel): Schlitzenden werden runder, Pattern bleibt.</li>
+            </ul>
+            Wenn etwas bricht: Timeline öffnet ein rotes Symbol, Doppelklick zum Editieren.
+          </li>
+
+          <li>
+            <strong>Speichern.</strong> Versionskommentar: <em>„Voll parametrische Kabelhalterung"</em>.
+          </li>
+
+          <li>
+            <strong>STL-Export.</strong> Rechtsklick auf den Body im Browser → <em>Save As Mesh</em>. Format STL Binary, Refinement Medium. Speichern.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Eine Kabelhalterung, die sich allein durch Parameteränderung an jeden Schreibtisch und an jede Kabelanzahl anpasst.
+          STL-Export ist druckbereit (Stützen empfehlenswert für die Klemme, ggf. flach drucken).
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Variante mit Beschriftungsfeld</h2>
+        <p>
+          Erweitere den Kabelhalter:
+        </p>
+        <ul>
+          <li>Auf der Außenseite der Klemme ein eingeprägtes Beschriftungsfeld 24×8 mm (z.&nbsp;B. „Mac" / „PC" / Nummerierung). Tiefe 0,6 mm.</li>
+          <li>Eingravierter Schriftzug deiner Wahl per <em>Sketch → Create → Text</em>, dann Cut-Extrude. Optional.</li>
+          <li>Größere Tischplattendicke (35 mm) ausprobieren – Klemme darf nicht „aufplatzen".</li>
+        </ul>
+        <p><strong>Akzeptanzkriterium:</strong> Datei <code>Lektion-2-5-Kabelhalter</code> hat ein neues Feature <em>Beschriftungsfeld</em> in der Timeline, parametrische Tiefe steuert die Eingravierung.</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Warum ist Symmetric-Extrude um die YZ-Ebene strategisch sinnvoll?</summary>
+          <div class="qa__body">Das Bauteil liegt mittig zur Origin. Origin-Ebenen können direkt als Spiegel- oder Pattern-Ebenen genutzt werden, ohne dass du Construction Geometry anlegen musst.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Was passiert, wenn du <code>schlitz_anzahl</code> auf 1 setzt?</summary>
+          <div class="qa__body">Der Arm wird automatisch schmaler (weil <code>arm_breite</code> davon abhängt) und das Pattern produziert nur eine Instanz. Sauberer Single-Schlitz-Halter.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Warum kommen die Verrundungen am Ende?</summary>
+          <div class="qa__body">Verrundete Kanten sind keine geraden Kanten mehr. Wenn du sie vor dem Pattern setzt, kann Fusion die Original-Kanten nicht mehr eindeutig referenzieren – Pattern bricht.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Wie passt der Halter auf eine 35-mm-Platte?</summary>
+          <div class="qa__body">Über den Parameter <code>tisch_dicke</code>. Der Innenausschnitt der Klemme wächst automatisch, alle Wandstärken bleiben konstant.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Was ist beim Druck zu beachten?</summary>
+          <div class="qa__body">Klemme liegend drucken (Schenkel nach oben), damit Schichten nicht senkrecht zur Klemmkraft liegen. Mit Stützen, oder neu orientieren, wenn der Slicer das anbietet. Vertiefung in Modul 3.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Pfad / Hotkey</th></tr></thead>
+            <tbody>
+              <tr><td>Slot</td><td>Sketch → Create → Slot</td></tr>
+              <tr><td>Symmetric Extrude</td><td><kbd>E</kbd> → Direction = Symmetric</td></tr>
+              <tr><td>Pattern editieren</td><td>Doppelklick auf Pattern in Timeline</td></tr>
+              <tr><td>Text in Skizze</td><td>Sketch → Create → Text</td></tr>
+              <tr><td>STL-Export</td><td>Rechtsklick Body → Save As Mesh</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>„Profil wird nicht erkannt"</em> → Trim hat das „C" zu weit aufgemacht. Eine Linie ergänzen, sodass die Außenkontur geschlossen ist.</li>
+            <li><em>„Pattern verschiebt nur in eine Richtung"</em> → Distribution-Modus prüfen (Spacing vs. Distance) und ggf. <em>Symmetric</em> im Pattern aktivieren.</li>
+            <li><em>„Fillet zerstört Schlitze"</em> → mit kleinerem Radius arbeiten oder einzelne Kanten gezielt verrunden, nicht <em>Tangent Chain</em> auf dem ganzen Arm.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-DF03A6F2-E12B-4F32-A0F0-E6CB6D08B3F5" rel="noopener">Autodesk Help: Parameters</a></li>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-FBE3F9B6-2E2E-44A4-9C42-D8F0F8A1C1F2" rel="noopener">Autodesk Help: Pattern</a></li>
+        </ul>
+      </section>
+
+      <div class="callout callout--note" style="margin-top:1.5rem">
+        <strong>🎉 Modul 2 abgeschlossen</strong>
+        Du beherrschst Constraints, Parameter, Konstruktionsebenen und Patterns.
+        Damit hast du das Werkzeug-Set, um wirklich anpassungsfähige Bauteile zu entwerfen.
+        Im nächsten Modul vertiefen wir das gelernte gezielt für den 3D-Druck:
+        Wandstärken, Toleranzen, Snap-Fits, Schraubsitze und der saubere Übergang in den Slicer.
+      </div>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

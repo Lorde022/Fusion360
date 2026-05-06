@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Joints und Bewegungen · Modul 5, Lektion 2 · Fusion 360 Kurs</title>
+  <meta name="description" content="Joints in Fusion 360: Rigid, Revolute, Slider, Cylindrical, Pin-Slot, Planar, Ball – Bauteile mechanisch verbinden und bewegen." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="joints"
+             data-module="5-baugruppen"
+             data-lesson-index="2">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 5</span> ›
+        Lektion 2
+      </p>
+      <h1 class="lesson__title">Joints und Bewegungen</h1>
+      <p class="lesson__meta">
+        <span>⏱ 45 Minuten</span>
+        <span>🎯 Baugruppen</span>
+        <span>🔗 Mechanik</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich verstehe das Konzept eines <strong>Joints</strong> als Verbindung zwischen zwei Components.</li>
+          <li>Ich setze <strong>Joint Origins</strong> präzise an wichtigen Geometrie-Punkten.</li>
+          <li>Ich kenne die sieben Joint-Typen: Rigid, Revolute, Slider, Cylindrical, Pin-Slot, Planar, Ball.</li>
+          <li>Ich nutze <strong>As-built Joints</strong>, um zwei vorhandene Components an Ort und Stelle zu verbinden.</li>
+          <li>Ich animiere Bewegungen mit der <strong>Drive Joint</strong>-Funktion und stoße erste Schritte einer <strong>Motion Study</strong> an.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Brauche ich für Joints zwingend Components?</summary>
+          <div class="qa__body">Ja. Bodies haben keine eigene Origin und keine Joint-Schnittstellen. Joints existieren nur zwischen Components.</div>
+        </details>
+        <details class="qa">
+          <summary>Was ist der einfachste Joint-Typ?</summary>
+          <div class="qa__body"><em>Rigid</em>. Zwei Components werden starr verbunden – kein Freiheitsgrad bleibt. Praktisch für „verschraubte" oder „verleimte" Verbindungen, die sich nicht bewegen sollen.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Joints und Joint Origins</h3>
+        <p>
+          Ein Joint verbindet zwei <strong>Joint Origins</strong>, jeweils eine pro Component.
+          Eine Joint Origin ist ein Punkt mit Koordinatensystem (X, Y, Z), den du an einer markanten Stelle (Eckpunkt, Flächenmitte, Bohrungsmitte) platzierst.
+          Beim Joint-Befehl werden diese beiden Origins zusammengeführt – die zweite Component bewegt sich, sodass ihre Origin auf der ersten landet.
+        </p>
+
+        <h3>Joint-Typen im Überblick</h3>
+        <table class="cheatsheet" style="width:100%">
+          <thead><tr><th>Typ</th><th>Freiheitsgrade</th><th>Anwendung</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Rigid</strong></td><td>0</td><td>Verschraubung, verleimte Holzverbindung</td></tr>
+            <tr><td><strong>Revolute</strong></td><td>1 Rotation</td><td>Scharniere, Räder, drehbare Hebel</td></tr>
+            <tr><td><strong>Slider</strong></td><td>1 Translation</td><td>Schubladen, Auszüge</td></tr>
+            <tr><td><strong>Cylindrical</strong></td><td>1 Rotation + 1 Translation entlang derselben Achse</td><td>Kolben in einer Bohrung</td></tr>
+            <tr><td><strong>Pin-Slot</strong></td><td>1 Rotation + 1 Translation senkrecht dazu</td><td>Stift in einem Langloch</td></tr>
+            <tr><td><strong>Planar</strong></td><td>2 Translation + 1 Rotation in einer Ebene</td><td>Bauteil auf Tisch verschiebbar</td></tr>
+            <tr><td><strong>Ball</strong></td><td>3 Rotationen</td><td>Kugelgelenk, Joystick</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Joint vs. As-built Joint</h3>
+        <ul>
+          <li><strong>Joint</strong> (klassisch): wählt Joint Origins von beiden Components – die zweite Component bewegt sich an die erste.</li>
+          <li><strong>As-built Joint</strong>: wenn beide Components <em>schon richtig positioniert</em> sind und dort verbunden werden sollen, ohne dass eine sich bewegt. Joint Origin liegt an einem bestehenden Geometriepunkt.</li>
+        </ul>
+        <p>
+          Faustregel: hast du Bauteile von außen importiert oder per Mirror erzeugt, sind sie meist schon korrekt platziert – nimm As-built. Hast du eine neue Component gerade frisch gebaut und sie liegt irgendwo, nimm Joint.
+        </p>
+
+        <h3>Joint-Limits und Drive</h3>
+        <p>
+          Im Joint-Dialog gibt es einen Bereich <em>Motion → Limits</em>. Hier setzt du minimale und maximale Bewegung. Eine Schublade zieht sich z.&nbsp;B. nur 400 mm raus, ein Scharnier öffnet maximal 110°.
+        </p>
+        <p>
+          Browser-Rechtsklick auf einen Joint → <em>Drive Joints</em>: du animierst die Bewegung interaktiv. Sehr nützlich, um Kollisionen zu finden („geht die Schublade ohne anzuecken auf?").
+        </p>
+
+        <h3>Motion Study</h3>
+        <p>
+          Toolbar <em>Assemble → Motion Study</em>: zeitbasierte Animation mit Keyframes. Aus Joints baust du eine kleine Animation, die du als Video exportierst – nützlich für Präsentationen oder zum Erklären eines Mechanismus.
+        </p>
+
+        <div class="callout callout--note">
+          <strong>Joints sind kein Constraint-System</strong>
+          Im Gegensatz zu reinen Constraint-CADs (z.&nbsp;B. SolidWorks Mate-System) sind Joints in Fusion ein bewusst einfaches, kinematisches Modell. Für komplexe Mechanismen mit vielen verschachtelten Bewegungen ist das ausreichend, aber kein klassischer FEM-Lösungsraum.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – Box mit Klappdeckel</h2>
+        <p>Wir versehen die SnapBox aus Modul 3 mit einem echten Scharnier-Joint und animieren das Öffnen.</p>
+
+        <ol class="steps">
+          <li>
+            <strong>SnapBox kopieren.</strong> Im Data Panel <em>Save As</em> → <code>Lektion-5-2-Box-Scharnier</code>.
+          </li>
+          <li>
+            <strong>Snap-Fits entfernen oder behalten?</strong>
+            Für die Übung entfernen: in der Timeline die Snap-Hook-Operationen ausblenden (Suppress) – die Bauteile werden wieder reine Plattengeometrie. Optional bleiben.
+          </li>
+          <li>
+            <strong>Joint Origin auf der Box.</strong>
+            Mit der Box-Component aktiv: Toolbar <em>Assemble → Joint Origin</em>. Klicke auf die hintere obere Kante der Box-Wand – Mittelpunkt einer Kante wird automatisch erkannt.
+            Die kleine Joint-Origin (drei farbige Pfeile) erscheint dort. <em>OK</em>.
+          </li>
+          <li>
+            <strong>Joint Origin auf dem Deckel.</strong>
+            Mit der Deckel-Component aktiv: <em>Joint Origin</em>, klicke auf die hintere untere Kante des Deckels (an der Stelle, wo das Scharnier sitzen wird).
+          </li>
+          <li>
+            <strong>Joint anlegen.</strong>
+            <em>Assemble → Joint</em>. Im Dialog:
+            <ul>
+              <li>Component 1: die Joint Origin der Box.</li>
+              <li>Component 2: die Joint Origin des Deckels.</li>
+              <li>Joint Type: <em>Revolute</em>.</li>
+              <li>Rotation Axis: passend ausrichten (entlang der Scharnier-Kante).</li>
+            </ul>
+            Vorschau zeigt: der Deckel klappt um diese Achse. <em>OK</em>.
+          </li>
+          <li>
+            <strong>Limits setzen.</strong> Browser → den neuen Joint rechtsklicken → <em>Edit Joint Limits</em>.
+            Min: 0°, Max: 110°. Aktivieren. <em>OK</em>.
+            Versuch nun, den Deckel mit der Maus weiter als 110° zu bewegen – er stoppt.
+          </li>
+          <li>
+            <strong>Animation per Drive.</strong> Joint rechtsklicken → <em>Drive Joints</em>. Schiebe den Slider zwischen 0 und 110°. Beobachte, ob alles sauber öffnet.
+          </li>
+          <li>
+            <strong>Motion Study (optional).</strong> <em>Assemble → Motion Study</em>. Joint hinzufügen, Keyframe bei 0s = 0°, Keyframe bei 2s = 110°, Keyframe bei 4s = 0°. Play.
+            <em>Output → Export Video</em> für eine kurze MP4.
+          </li>
+          <li>
+            <strong>Speichern.</strong>
+          </li>
+        </ol>
+
+        <h3>Bonus – Schublade mit Slider Joint</h3>
+        <ol class="steps">
+          <li>
+            <strong>Korpus + Schublade konstruieren.</strong> Zwei Components: ein offener Korpus (z.&nbsp;B. 200×150×120 mm), eine Schublade etwas kleiner.
+          </li>
+          <li>
+            <strong>Joint Origins.</strong> Auf der Innenseite des Korpusbodens vorne mittig eine Joint Origin. Auf der Schubladenboden-Vorderseite mittig eine Joint Origin.
+          </li>
+          <li>
+            <strong>Slider Joint.</strong> <em>Assemble → Joint</em>, Type = <em>Slider</em>, Achse entlang Y (vor/zurück). Vorschau: Schublade gleitet. <em>OK</em>.
+          </li>
+          <li>
+            <strong>Limits.</strong> Min: 0 mm (Schublade vollständig drin), Max: 100 mm (Schublade 100 mm raus). Test per Drive.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Eine Box mit funktionierendem Klapp-Deckel, eine Schublade mit Slider, beide mit Limits. Optional eine kleine Animations-Vorschau.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Werkstatt-Mechanismus</h2>
+        <p>
+          Konstruiere einen einfachen Mechanismus deiner Wahl:
+        </p>
+        <ul>
+          <li><strong>Schwingarm-Lampe</strong> mit Revolute-Joints zwischen drei Armsegmenten.</li>
+          <li><strong>Schraubzwinge</strong> mit Slider-Joint im Schaft.</li>
+          <li><strong>Klapptür-Schrank</strong> mit zwei Revolute-Scharnieren parallel.</li>
+        </ul>
+        <p>
+          <strong>Akzeptanzkriterium:</strong> mindestens zwei Joints, alle mit Limits, Bewegung per Drive prüfbar, keine Kollisionen.
+        </p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Was ist der Unterschied zwischen Joint und As-built Joint?</summary>
+          <div class="qa__body">Joint bewegt eine Component an die andere (Joint Origins werden zusammengeführt). As-built Joint nimmt die <em>aktuelle</em> Position als gegeben an, ohne eine Component zu verschieben.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Welcher Joint-Typ passt für ein Scharnier?</summary>
+          <div class="qa__body">Revolute – ein Rotationsfreiheitsgrad um eine Achse.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Wie verhinderst du, dass eine Schublade unendlich weit aufgeht?</summary>
+          <div class="qa__body">Joint-Limits setzen: Min und Max für die Translation. Per Edit Joint Limits oder direkt im Joint-Dialog.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Wofür brauchst du Pin-Slot?</summary>
+          <div class="qa__body">Wenn ein Stift in einem Langloch sowohl entlang der Schlitzlänge gleiten als auch um sich drehen kann – Klassiker bei Kniehebel-Mechanismen.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Wozu Drive Joints?</summary>
+          <div class="qa__body">Zum interaktiven Testen einer Bewegung. Du schiebst per Slider durch den ganzen Bewegungsraum und siehst, wo Bauteile aneinanderecken könnten.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Pfad / Hotkey</th></tr></thead>
+            <tbody>
+              <tr><td>Joint Origin setzen</td><td>Assemble → Joint Origin</td></tr>
+              <tr><td>Joint anlegen</td><td>Assemble → Joint (<kbd>J</kbd>)</td></tr>
+              <tr><td>As-built Joint</td><td>Assemble → As-built Joint</td></tr>
+              <tr><td>Limits</td><td>Joint im Browser → Rechtsklick → Edit Joint Limits</td></tr>
+              <tr><td>Bewegen</td><td>Joint → Rechtsklick → Drive Joints</td></tr>
+              <tr><td>Motion Study</td><td>Assemble → Motion Study</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>„Joint will nicht greifen"</em> → Joint Origin liegt auf einer ungeeigneten Stelle. Auf einer Kantenmitte oder einer flächenzentrischen Position neu setzen.</li>
+            <li><em>„Component bewegt sich falsch herum"</em> → Joint Origin Z-Achse falsch ausgerichtet. Im Joint-Dialog <em>Flip</em> oder <em>Reorient</em>.</li>
+            <li><em>„Bauteile durchdringen sich"</em> → Joint kennt keine Kollisionen. Per Drive Joints visuell prüfen, Limits enger setzen.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-8DC9DA5C-7E1F-4FCF-9947-D29D4F3A12B6" rel="noopener">Autodesk Help: Joints</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=fusion+360+joints+motion+study" rel="noopener">YouTube: Joints und Motion Studies</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

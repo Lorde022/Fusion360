@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Werkstattzeichnungen (Drawings) · Modul 4, Lektion 4 · Fusion 360 Kurs</title>
+  <meta name="description" content="Drawing-Workspace, Ansichten, Bemaßungen und Schnittzeichnungen – aus dem 3D-Modell zur druckbaren Werkstattzeichnung." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="drawings"
+             data-module="4-holzwerken"
+             data-lesson-index="4">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 4</span> ›
+        Lektion 4
+      </p>
+      <h1 class="lesson__title">Drawings: Werkstattzeichnungen erstellen</h1>
+      <p class="lesson__meta">
+        <span>⏱ 50 Minuten</span>
+        <span>🎯 Holzwerken-Fokus</span>
+        <span>📐 Technische Zeichnung</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich erstelle ein <strong>Drawing</strong> aus einem 3D-Modell.</li>
+          <li>Ich plaziere <strong>Standardansichten</strong> (Vorne, Oben, Seite, Iso) und <strong>Schnitte</strong>.</li>
+          <li>Ich bemaße sauber mit <em>linear</em>, <em>aligned</em>, <em>diameter</em>, <em>angular</em>.</li>
+          <li>Ich konfiguriere ein passendes Schriftfeld mit Projekt-Metadaten.</li>
+          <li>Ich exportiere das Drawing als PDF für die Werkstatt.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Was ist eine Schnittzeichnung gut für?</summary>
+          <div class="qa__body">Sie zeigt das Bauteil so, als wäre es entlang einer Ebene aufgeschnitten. Innenliegende Details (Bohrungen, Nuten, Hohlräume) werden sichtbar.</div>
+        </details>
+        <details class="qa">
+          <summary>Welcher Maßstab ist Standard für Möbelzeichnungen auf A4?</summary>
+          <div class="qa__body">1:5 oder 1:10, je nach Bauteilgröße. Ein 1500 mm langes Regal passt bei 1:10 sauber auf eine A3-Seite.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Drawing-Workspace</h3>
+        <p>
+          Drawings sind <strong>verlinkte 2D-Ableitungen</strong> aus dem 3D-Modell. Wenn das Modell sich ändert, kannst du die Drawing aktualisieren – die Ansichten regenerieren sich, Maße bleiben da, wo sie waren.
+        </p>
+        <p>
+          Erreichbar über: oberes Workspace-Menü <em>Design → Drawing → From Design</em>. Im Dialog wählst du Ausrichtung (Landscape/Portrait), Standardgröße (A4/A3/Letter) und Standard (ASME/ISO – für Europa <em>ISO</em>).
+        </p>
+
+        <h3>Ansichten</h3>
+        <ul>
+          <li><strong>Base View</strong>: erste Ansicht, du wählst Orientierung und Maßstab.</li>
+          <li><strong>Projected View</strong>: weitere Ansichten (Top, Side, Iso) automatisch aus der Base View abgeleitet.</li>
+          <li><strong>Section View</strong>: Schnitt entlang einer Linie. Innenliegende Details sichtbar.</li>
+          <li><strong>Detail View</strong>: vergrößerter Ausschnitt eines Bereichs.</li>
+        </ul>
+
+        <h3>Bemaßung</h3>
+        <p>
+          Toolbar-Bereich <em>Dimensions</em>:
+        </p>
+        <ul>
+          <li><strong>Linear / Aligned</strong>: Strecken zwischen zwei Punkten.</li>
+          <li><strong>Angular</strong>: Winkel zwischen zwei Linien.</li>
+          <li><strong>Diameter / Radius</strong>: Bohrungen und Verrundungen.</li>
+          <li><strong>Baseline / Chain</strong>: Maßketten ausgehend von einer Referenz.</li>
+        </ul>
+        <p>
+          Tipp: Maße immer von einer <strong>klaren Referenzkante</strong> aus setzen, nicht von Maß zu Maß. Sonst summieren sich Toleranzen, die in der Werkstatt zu Spielfehlern führen.
+        </p>
+
+        <h3>Schriftfeld (Title Block)</h3>
+        <p>
+          Standardisiertes Feld am unteren rechten Blattrand mit Projektname, Bauteilname, Datum, Maßstab, Ersteller, Versionsnummer.
+          Fusion bringt eine ASME- und eine ISO-Variante mit. Felder lassen sich klicken und ausfüllen.
+        </p>
+
+        <h3>Praxis-Tipps für Holzwerker-Drawings</h3>
+        <ul>
+          <li>Pro Bauteil eine eigene Drawing-Seite, plus eine Übersichtsseite mit Iso-Ansicht der Baugruppe.</li>
+          <li>Maßstab so wählen, dass Maße noch lesbar sind (mindestens 8 pt Schrift).</li>
+          <li>Maße in <strong>Millimetern ohne Einheit</strong> (DIN-Konvention), Toleranzen nur dort, wo nötig.</li>
+          <li>Bohrungen mit Lochsymbol bemaßen (⌀5), Senkungen mit zusätzlichem Symbol für Tiefe.</li>
+          <li>Materialhinweis nicht vergessen – sonst weiß die Werkstatt nicht, ob es 18 oder 19 mm sein soll.</li>
+        </ul>
+
+        <div class="callout callout--note">
+          <strong>Zwei Drawings pro Projekt</strong>
+          Eine <em>Werkstattzeichnung</em> für die Fertigung (jedes Teil einzeln, jedes Maß) und eine <em>Übersicht</em> mit Baugruppen-Iso und Stückliste. Spart in der Werkstatt erheblich Zeit.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – Drawing für die SnapBox</h2>
+        <p>Wir nehmen die SnapBox aus Modul 3.4 und erstellen eine vollwertige Werkstattzeichnung.</p>
+
+        <ol class="steps">
+          <li>
+            <strong>SnapBox öffnen.</strong> <em>Lektion-3-4-SnapBox</em>.
+          </li>
+
+          <li>
+            <strong>Drawing starten.</strong>
+            Toolbar oben links: Workspace-Wechsel zu <em>Drawing → From Design</em>.
+            Dialog:
+            <ul>
+              <li>Standard: <em>ISO</em>.</li>
+              <li>Sheet Size: A4.</li>
+              <li>Orientation: Landscape.</li>
+              <li>Template: Standard (Fusion-Default).</li>
+            </ul>
+            <em>OK</em>. Eine leere Zeichnung mit Schriftfeld erscheint.
+          </li>
+
+          <li>
+            <strong>Base View platzieren.</strong> Toolbar <em>Drawing Views</em> → <em>Base View</em>.
+            Im Panel rechts:
+            <ul>
+              <li>Component: SnapBox-Box (oder die ganze Datei).</li>
+              <li>Orientation: <em>Front</em>.</li>
+              <li>Style: <em>Visible Edges</em> oder <em>Visible and Hidden Edges</em>.</li>
+              <li>Scale: 1:2 oder 1:1 je nach Größe.</li>
+            </ul>
+            Klicke auf das Blatt, um die Ansicht zu platzieren.
+          </li>
+
+          <li>
+            <strong>Projected Views.</strong> Mit der Base View ausgewählt: <em>Drawing Views → Projected View</em>. Bewege die Maus nach oben → Top View. Klicke. Wieder nach rechts → Side View. Klicke. Schräg nach oben rechts → Iso. Klicke. <kbd>Esc</kbd>.
+          </li>
+
+          <li>
+            <strong>Section View.</strong> <em>Drawing Views → Section View</em>. Klicke die Front-Ansicht. Zeichne eine vertikale Linie mitten durch. <kbd>Enter</kbd>. Eine Schnittansicht erscheint, die Snap-Fits werden im Schnitt sichtbar.
+          </li>
+
+          <li>
+            <strong>Bemaßung.</strong>
+            <em>Dimensions → Linear</em>. Bemaße in der Front-Ansicht:
+            <ul>
+              <li>Außenbreite (z.&nbsp;B. 60 mm).</li>
+              <li>Höhe (25 mm).</li>
+              <li>Wandstärke (1,6 mm).</li>
+            </ul>
+            In der Top-Ansicht:
+            <ul>
+              <li>Außentiefe (40 mm).</li>
+              <li>Position der Snap-Hinterschnitte.</li>
+            </ul>
+            In der Schnittansicht:
+            <ul>
+              <li>Innenmaße der Box.</li>
+              <li>Höhe und Tiefe der Snap-Aussparungen.</li>
+            </ul>
+          </li>
+
+          <li>
+            <strong>Lochbemaßung.</strong> <em>Dimensions → Diameter</em>. Klicke vorhandene Bohrungen, das Symbol ⌀ wird automatisch gesetzt.
+          </li>
+
+          <li>
+            <strong>Schriftfeld ausfüllen.</strong> Doppelklick auf die Felder im rechten unteren Block:
+            <ul>
+              <li>Project: „Fusion-Kurs"</li>
+              <li>Title: „SnapBox – Korpus"</li>
+              <li>Drawn by: „Dennis"</li>
+              <li>Date: aktuelles Datum</li>
+              <li>Scale: dem Wert deiner Base View entsprechend</li>
+              <li>Sheet: 1/2 (wenn Deckel auf zweitem Blatt)</li>
+            </ul>
+          </li>
+
+          <li>
+            <strong>Zweites Blatt: Deckel.</strong> Im Browser links unten: <em>+ Sheet</em>. Neues Blatt anlegen. Dort dieselben Schritte mit dem Deckel-Body wiederholen.
+          </li>
+
+          <li>
+            <strong>Übersichtsblatt mit Iso.</strong> Drittes Blatt: nur eine große Iso-Ansicht der ganzen Baugruppe + leeres Stücklistenfeld (BOM in nächster Lektion).
+          </li>
+
+          <li>
+            <strong>Speichern und PDF.</strong> <kbd>Strg</kbd>+<kbd>S</kbd>.
+            <em>Output → Output PDF</em>: Speicherort, alle Sheets, <em>OK</em>. PDF in der Werkstatt drucken.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Eine Drawing-Datei mit drei Sheets: Korpus, Deckel, Übersicht. Vollständig bemaßt, mit gefülltem Schriftfeld, exportiert als PDF.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Drawing für eine Box aus Modul 4.2</h2>
+        <p>
+          Erstelle eine Werkstattzeichnung für die Holzkiste aus der Transferaufgabe Lektion 4.2 (oder eine vergleichbare Box):
+        </p>
+        <ul>
+          <li>Pro Bauteil ein eigenes Sheet (Boden, vier Seiten, Rückwand falls vorhanden).</li>
+          <li>Jeder Bauteil mit Front-, Top- und Iso-Ansicht.</li>
+          <li>Alle Maße sichtbar.</li>
+          <li>Übersichtsblatt mit Iso der Baugruppe.</li>
+        </ul>
+        <p><strong>Akzeptanzkriterium:</strong> Drawing als PDF, in der Werkstatt würde jemand allein anhand des PDFs die Box fertigen können.</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Was passiert mit einer Drawing, wenn du das 3D-Modell änderst?</summary>
+          <div class="qa__body">Fusion zeigt einen Hinweis im Drawing-Workspace „Out of Date". Über <em>Update</em> regenerieren sich die Ansichten. Maße, die du in der Drawing platziert hast, bleiben erhalten.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Welche Norm ist in Europa Standard?</summary>
+          <div class="qa__body">ISO. ASME ist die US-Norm. Sie unterscheiden sich in Pfeil-Stilen, Maßlinienlogik und Symbolen.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Wann nimmst du eine Schnittansicht?</summary>
+          <div class="qa__body">Wenn innenliegende Details (Bohrungen, Nuten, Wandstärken hohler Bauteile) sichtbar gemacht werden müssen, ohne durch <em>Hidden Lines</em> die Zeichnung unleserlich zu machen.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Was bedeutet ⌀ in einer Bemaßung?</summary>
+          <div class="qa__body">Durchmesser. Wird automatisch gesetzt, wenn du eine kreisförmige Geometrie (Bohrung, Welle) bemaßt.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Wie exportierst du das Drawing für den Drucker?</summary>
+          <div class="qa__body"><em>Output → Output PDF</em>. Optional auch <em>Output DWG/DXF</em>, falls die Werkstatt CAD-Daten weiterverarbeitet.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Pfad</th></tr></thead>
+            <tbody>
+              <tr><td>Drawing anlegen</td><td>Workspace → Drawing → From Design</td></tr>
+              <tr><td>Base View</td><td>Drawing Views → Base View</td></tr>
+              <tr><td>Projected View</td><td>Drawing Views → Projected View</td></tr>
+              <tr><td>Section View</td><td>Drawing Views → Section View</td></tr>
+              <tr><td>Detail View</td><td>Drawing Views → Detail View</td></tr>
+              <tr><td>Bemaßung linear</td><td>Dimensions → Linear / Aligned</td></tr>
+              <tr><td>Schriftfeld füllen</td><td>Doppelklick auf Feld unten rechts</td></tr>
+              <tr><td>PDF-Export</td><td>Output → Output PDF</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>„Maß kann nicht gesetzt werden"</em> → erst die Ansicht aktivieren (Klick auf den Rahmen), dann das Maß-Tool.</li>
+            <li><em>„Maß zeigt falsche Zahl"</em> → 3D-Modell in einer veränderten Version geöffnet, Drawing nicht aktualisiert. <em>Update</em>.</li>
+            <li><em>„Schnitt zeigt zu viel"</em> → Schnittlinien-Position prüfen. Schnittlinien können auch um Ecken laufen (Steplinien) für komplexere Schnitte.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-95C7D376-B0A4-4F1F-B0DC-3D6B6D7B43F2" rel="noopener">Autodesk Help: Drawings</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=fusion+360+drawing+workspace+tutorial" rel="noopener">YouTube: Drawings in der Praxis</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

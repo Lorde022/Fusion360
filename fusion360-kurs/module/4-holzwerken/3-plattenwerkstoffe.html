@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plattenwerkstoffe und Materialdicken · Modul 4, Lektion 3 · Fusion 360 Kurs</title>
+  <meta name="description" content="Multiplex, MDF, Spanplatte, Massivholz – reale Materialdicken, Toleranzen und Konstruktionsregeln für Plattenkonstruktionen." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="plattenwerkstoffe"
+             data-module="4-holzwerken"
+             data-lesson-index="3">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 4</span> ›
+        Lektion 3
+      </p>
+      <h1 class="lesson__title">Plattenwerkstoffe und reale Materialdicken</h1>
+      <p class="lesson__meta">
+        <span>⏱ 35 Minuten</span>
+        <span>🎯 Holzwerken-Fokus</span>
+        <span>📏 Realmaße</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich kenne die wichtigsten Plattenwerkstoffe und ihre typischen Anwendungen.</li>
+          <li>Ich weiß, dass Plattendicken <strong>nominal</strong> heißen, aber real abweichen.</li>
+          <li>Ich nutze einen <strong>Plattenstärke-Parameter</strong>, um auf Materialwechsel reagieren zu können.</li>
+          <li>Ich konstruiere mit Vorhalt für Quellen, Schwinden und Toleranz.</li>
+          <li>Ich weiß, welche Stärken im Baumarkt typisch lagernd sind.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Wie dick ist „18-mm-Multiplex" wirklich?</summary>
+          <div class="qa__body">Meist 17,5–18,2 mm. Die Bezeichnung ist nominal. Beim Konstruieren entweder die reale Dicke nachmessen oder mit einem Toleranzwert konstruieren.</div>
+        </details>
+        <details class="qa">
+          <summary>Warum schwindet Holz?</summary>
+          <div class="qa__body">Holz nimmt Feuchte aus der Luft auf und gibt sie ab. Dadurch ändert sich das Volumen – stark quer zur Faser, kaum entlang. Schwinden ist im Hobbybau bei Plattenwerkstoffen meist vernachlässigbar, im Massivholzbau aber wichtig.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Plattenwerkstoffe im Überblick</h3>
+        <table class="cheatsheet" style="width:100%">
+          <thead><tr><th>Material</th><th>Typische Stärken</th><th>Eigenschaften</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Multiplex / Sperrholz Birke</strong></td><td>4, 6, 9, 12, 15, 18, 21, 24 mm</td><td>Sehr fest, formstabil, schöne Sichtkante. Teurer.</td></tr>
+            <tr><td><strong>MDF</strong></td><td>3, 6, 8, 10, 12, 16, 19, 22 mm</td><td>Sehr glatt, gut zu fräsen, Sichtkante muss kantenumleimt werden. Schluckt Feuchte.</td></tr>
+            <tr><td><strong>Spanplatte (roh)</strong></td><td>10, 12, 16, 19, 22, 25 mm</td><td>Günstig, weniger formstabil. Verschraubung schwächer als Multiplex.</td></tr>
+            <tr><td><strong>OSB</strong></td><td>9, 12, 15, 18, 22 mm</td><td>Industrielle Optik, sehr fest. Im Möbelbau eher selten.</td></tr>
+            <tr><td><strong>Massivholz Eiche/Buche</strong></td><td>15, 19, 22, 27 mm (Leimholz-Platten)</td><td>Schön, arbeitend (Quellen/Schwinden quer zur Faser). Teuer.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Reale Maßabweichungen</h3>
+        <p>
+          Nominaler Wert ≠ realer Wert. Multiplex ist meist 0,3–0,5 mm dünner als angegeben.
+          Konsequenzen für Verbindungen:
+        </p>
+        <ul>
+          <li>Ein Schlitz mit Innenmaß <code>brett_dicke</code> klemmt nicht – das Brett ist dünner und rutscht durch.</li>
+          <li>Ein Zapfen mit Außenmaß <code>brett_dicke</code> sitzt zu locker.</li>
+        </ul>
+        <p>
+          Lösung: <strong>real nachmessen</strong> und <code>brett_dicke</code> auf den gemessenen Wert setzen. Bei großen Projekten lohnt sich ein Anruf beim Holzhändler nach der Charge.
+        </p>
+
+        <h3>Standard-Parameter-Block für Plattenkonstruktionen</h3>
+        <pre><code>// — Material —
+brett_dicke      = 18 mm    Multiplex Birke (real gemessen!)
+fuge             = 0.10 mm  Toleranz Verbindungen
+nut_breite       = brett_dicke + fuge
+nut_tiefe        = brett_dicke / 2
+
+// — Befestigung —
+schraube_d       = 4 mm     M4 oder Spax 4
+schraube_loch    = 4.5 mm   Vorbohrung
+duebel_d         = 8 mm     Holzdübel</code></pre>
+
+        <h3>Verbindungs-Geometrie für Plattenmaterial</h3>
+        <ul>
+          <li><strong>Stoßverbindung mit Dübeln/Lamellos</strong>: schnell, stabil, unsichtbar. Im CAD als Bohrungen oder Schlitze modellieren.</li>
+          <li><strong>Nut-Feder</strong>: ein Brett bekommt eine Nut, das andere endet stumpf darin. Klassisch für Rück- und Bodenwände.</li>
+          <li><strong>Verschraubung mit Korpusschrauben</strong> (z.&nbsp;B. Spax): einfach, hält gut. Vorbohren nicht vergessen, sonst spaltet die Platte.</li>
+          <li><strong>Excenter-Beschläge</strong>: schwedische Möbel-Klassik. Für CAD: Bohrlöcher in Standardmaßen (5 mm + 15 mm) modellieren.</li>
+        </ul>
+
+        <div class="callout callout--note">
+          <strong>Im Korpus konstruieren wie im Möbelbau</strong>
+          Eine Standardregel: <em>Boden und Deckel zwischen den Seiten</em> oder <em>Seiten zwischen Boden und Deckel</em>. Die zweite Variante hat oft die bessere Stoßfläche zur Lastabtragung. Eine konsequente Wahl im Projekt erleichtert die Stückliste enorm.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – Materialdicke messen, Modell anpassen</h2>
+
+        <ol class="steps">
+          <li>
+            <strong>Reale Platte messen.</strong> Falls du Multiplex oder MDF zur Hand hast: mit Messschieber die Dicke an drei Stellen nehmen. Häufig liegt sie zwischen 17,5 und 18,3 mm bei nominal 18 mm.
+            Notiere den Mittelwert.
+          </li>
+          <li>
+            <strong>Box aus Lektion 4.2 öffnen</strong> (oder eine andere Plattenkonstruktion).
+            Ändere <code>brett_dicke</code> auf deinen gemessenen Wert (z.&nbsp;B. 17,8 mm).
+            Beobachte: alle Verbindungen passen automatisch an.
+          </li>
+          <li>
+            <strong>Sicherheitstest.</strong> Setze <code>brett_dicke</code> probeweise auf 12 mm. Verbindungen werden schmaler. Auf 24 mm testen – Verbindungen werden breiter. Dort bleibt das Modell konsistent: <code>nut_breite = brett_dicke + fuge</code> rechnet immer korrekt.
+            Setze zurück auf den realen Wert.
+          </li>
+          <li>
+            <strong>Standard-Parameter-Block vorbereiten.</strong> Kopiere obigen Code-Block in eine Notiz oder ein eigenes Fusion-Template-Design. Bei jedem neuen Plattenwerk-Projekt fügst du ihn als Erstes ein.
+          </li>
+          <li>
+            <strong>Materialhinweis im Body.</strong> Im Browser den Body rechtsklicken → <em>Properties</em>. Trage im Feld <em>Description</em> den exakten Werkstoff ein („Multiplex Birke 17,8 mm, Charge 2025-04"). In der Stückliste taucht das später auf.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Du hast einen wiederverwendbaren Parameter-Block für Plattenkonstruktionen, ein Bewusstsein für reale vs. nominale Maße, und ein Modell, das auf andere Plattenstärken vorhersagbar reagiert.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Material-Vergleichsstudie</h2>
+        <p>
+          Konstruiere ein einfaches Regalbrett 800×300 mm in drei Varianten – als drei separate Designs:
+        </p>
+        <ul>
+          <li><code>Brett-Multiplex</code>: 18 mm, Multiplex Birke.</li>
+          <li><code>Brett-MDF</code>: 19 mm, MDF.</li>
+          <li><code>Brett-Eiche</code>: 22 mm, Eiche-Leimholz.</li>
+        </ul>
+        <p>
+          Materialien aus deiner Library zuweisen. Vergleiche die Massen über <em>Inspect → Properties</em>. Notiere die drei Werte.
+        </p>
+        <p><strong>Akzeptanzkriterium:</strong> Drei Designs, Massen plausibel (zwischen ca. 2,5 und 4 kg).</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Warum mit nachgemessener Plattendicke konstruieren statt mit Nominalmaß?</summary>
+          <div class="qa__body">Nominal 18 mm sind real oft 17,5–18,2 mm. Schon 0,3 mm Differenz machen den Unterschied zwischen klemmender und durchrutschender Verbindung.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Welcher Plattenwerkstoff hat im Hobbybereich die beste Schraubfestigkeit?</summary>
+          <div class="qa__body">Multiplex Birke. Die kreuzweise verleimten Furniere geben Schrauben sehr guten Halt. Spanplatte ist deutlich schlechter, MDF schlechter als Multiplex aber besser als Spanplatte.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Was bedeutet „Boden zwischen den Seiten"?</summary>
+          <div class="qa__body">Konstruktion, bei der der Boden in die senkrechten Seitenwände eingelassen ist (kürzer). Alternative: „Seiten auf dem Boden" mit längeren Seiten.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Warum ist MDF empfindlich gegen Feuchte?</summary>
+          <div class="qa__body">MDF besteht aus feinen Holzfasern + Bindemittel. Wasser dringt ein und quellt das Material auf, ohne dass es danach in Form zurückkehrt. Lackieren oder kantenumleimen schützt.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Was ist der Vorteil eines Plattenstärke-Parameters?</summary>
+          <div class="qa__body">Wenn du das Material wechselst (z.&nbsp;B. von 18 mm Multiplex auf 19 mm MDF), passt das ganze Modell sich an – Nutbreiten, Schlitzgrößen, Stoßverbindungen rechnen sich automatisch neu.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Werkstoff</th><th>Standard-Stärke Möbel</th><th>Realtoleranz</th></tr></thead>
+            <tbody>
+              <tr><td>Multiplex Birke</td><td>15 / 18 mm</td><td>±0,3 mm</td></tr>
+              <tr><td>MDF</td><td>16 / 19 mm</td><td>±0,2 mm</td></tr>
+              <tr><td>Spanplatte (Möbel)</td><td>16 / 19 mm</td><td>±0,3 mm</td></tr>
+              <tr><td>Eiche-Leimholz</td><td>19 / 27 mm</td><td>±0,5 mm + Quellen</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>Schrauben spalten Multiplex</em> → unbedingt vorbohren mit ⌀ etwas unter dem Schraubendurchmesser.</li>
+            <li><em>MDF wölbt sich</em> → bei größeren Flächen Verzug einplanen, ggf. Verleimung mit Multiplex-Rückwand.</li>
+            <li><em>Verbindung sitzt zu locker</em> → reale Plattendicke nachmessen, Parameter aktualisieren.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://www.holzfachhandel.de/" rel="noopener">Plattenwerkstoffe Übersicht (Beispiel-Holzfachhandel)</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=plattenwerkstoffe+vergleich" rel="noopener">YouTube: Plattenwerkstoffe im Vergleich</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

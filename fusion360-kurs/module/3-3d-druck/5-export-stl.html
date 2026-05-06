@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Export STL und 3MF · Modul 3, Lektion 5 · Fusion 360 Kurs</title>
+  <meta name="description" content="Sauber für den Slicer exportieren: STL, 3MF, Refinement-Stufen, Mesh-Workspace und häufige Fehler." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="export-stl"
+             data-module="3-3d-druck"
+             data-lesson-index="5">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 3</span> ›
+        Lektion 5
+      </p>
+      <h1 class="lesson__title">Export: STL, 3MF, Mesh-Workspace, Reparatur</h1>
+      <p class="lesson__meta">
+        <span>⏱ 35 Minuten</span>
+        <span>🎯 3D-Druck-Fokus</span>
+        <span>📤 Slicer-Übergabe</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich kenne den Unterschied zwischen STL, 3MF und OBJ.</li>
+          <li>Ich wähle die richtige <strong>Refinement-Stufe</strong> für meinen Anwendungsfall.</li>
+          <li>Ich exportiere einzelne Bodies oder ganze Components getrennt oder gemeinsam.</li>
+          <li>Ich kenne den <strong>Mesh-Workspace</strong> und kann importierte STL reparieren.</li>
+          <li>Ich übergebe sauber an PrusaSlicer, Cura, Bambu Studio o.ä.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Was ist eine Mesh-Datei?</summary>
+          <div class="qa__body">Eine 3D-Datei, die die Oberfläche eines Bauteils als Netz aus Dreiecken beschreibt. STL und OBJ sind klassische Mesh-Formate. CAD-Modelle (B-Rep) hingegen beschreiben Geometrie mathematisch exakt.</div>
+        </details>
+        <details class="qa">
+          <summary>Warum reicht für FDM meistens „Medium"-Refinement?</summary>
+          <div class="qa__body">Drucker mit 0,4 mm Düse können Details unter 0,2 mm sowieso nicht abbilden. Höhere Refinement-Stufen produzieren riesige Dateien, die der Slicer langsam lädt, ohne dass der Druck sichtbar besser wird.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Formate im Überblick</h3>
+        <table class="cheatsheet" style="width:100%">
+          <tbody>
+            <tr><td><strong>STL</strong></td><td>Standard im Hobbybereich. Reine Geometrie, keine Farbe, keine Einheit (oft mm angenommen). Binary kleiner als ASCII.</td></tr>
+            <tr><td><strong>3MF</strong></td><td>Modernes Format, transportiert Farbe, Maßeinheit, Multi-Material, sogar Slicer-Settings. Wird zunehmend von allen Slicern unterstützt.</td></tr>
+            <tr><td><strong>OBJ</strong></td><td>Aus der 3D-Grafik-Welt. Im 3D-Druck weniger üblich, aber unterstützt Texturen.</td></tr>
+            <tr><td><strong>STEP</strong></td><td>CAD-Format, kein Mesh. Manche Slicer lesen es direkt (PrusaSlicer ja). Vorteil: keine Triangulierung nötig, exakte Geometrie.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Refinement-Stufen</h3>
+        <ul>
+          <li><strong>Low</strong>: grob, sichtbare Polygonkanten. Nur für sehr einfache Bauteile.</li>
+          <li><strong>Medium</strong>: <em>Empfohlen für FDM</em>. Glatt genug, Datei klein.</li>
+          <li><strong>High</strong>: für sichtbar runde Flächen, sehr feine Details. Datei wird ca. 4–8× größer als Medium.</li>
+          <li><strong>Custom</strong>: eigene Werte für <em>Surface Deviation</em>, <em>Normal Deviation</em>, <em>Maximum Edge Length</em>, <em>Aspect Ratio</em>.</li>
+        </ul>
+
+        <h3>Wie exportiere ich aus Fusion?</h3>
+        <p>Drei Wege, alle zum gleichen Ergebnis:</p>
+        <ol>
+          <li><strong>Browser-Rechtsklick</strong> auf einen Body oder eine Component → <em>Save As Mesh</em>. Schnellster Weg für Einzelteile.</li>
+          <li><strong>Datei → Export</strong>: ganze Datei als 3MF/STL.</li>
+          <li><strong>Manufacture-Workspace → 3D Print</strong>: dortiges Werkzeug zeigt Vorschau, kann direkt in einen Slicer launchen, wenn die App-Verknüpfung gesetzt ist.</li>
+        </ol>
+
+        <h3>Mehrere Bodies, eine Datei</h3>
+        <p>
+          Im Save-as-Mesh-Dialog kannst du <em>One file</em> oder <em>One file per body</em> wählen.
+          Für Multi-Material- oder Multi-Color-Drucke (3MF mit Materialzuordnung) hilft <em>One file</em>.
+          Für getrenntes Drucken einzelner Bauteile <em>One file per body</em>.
+        </p>
+
+        <h3>Der Mesh-Workspace</h3>
+        <p>
+          Wenn du eine STL importierst, landet sie als <em>Mesh-Body</em> im Browser. Im <em>Mesh-Workspace</em> (Toolbar oben links auf <em>Design → Mesh</em>) kannst du:
+        </p>
+        <ul>
+          <li><strong>Repair</strong>: Löcher schließen, falsche Normalen korrigieren.</li>
+          <li><strong>Reduce</strong>: Polygone reduzieren (für simplere Geometrie).</li>
+          <li><strong>Modify → Convert Mesh</strong>: Mesh in einen Solid Body umwandeln (begrenzt sinnvoll, oft zu komplex für Fusion).</li>
+        </ul>
+        <p>
+          Wichtig: Mesh-Bodies haben keine Timeline-Geschichte. Bearbeiten sie ist nicht parametrisch. Im Zweifel lieber <strong>neu konstruieren</strong> statt importierte Meshes umbauen.
+        </p>
+
+        <div class="callout callout--note">
+          <strong>Slicer-Schnittstelle</strong>
+          PrusaSlicer und Bambu Studio öffnen 3MF nativ inklusive Komponentenfarben. Cura behandelt Multi-Body in 3MF unterschiedlich. Wenn der Slicer „verschiedene Bauteile" erkennt, aber alles als ein Drucker-Job sehen soll: in Cura per Rechtsklick „Merge Models" zusammenführen.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – sauberer Export</h2>
+
+        <ol class="steps">
+          <li>
+            <strong>SnapBox aus Lektion 3.4 öffnen.</strong>
+          </li>
+
+          <li>
+            <strong>STL für Einzelteile.</strong>
+            Browser-Rechtsklick auf den Box-Body → <em>Save As Mesh</em>.
+            Dialog:
+            <ul>
+              <li>Format: STL (Binary).</li>
+              <li>Refinement: Medium.</li>
+              <li>Speicherort: dein Slicer-Eingangsordner.</li>
+              <li>Dateiname: <code>SnapBox-Box.stl</code>.</li>
+            </ul>
+            <em>OK</em>. Wiederhole für den Deckel-Body.
+          </li>
+
+          <li>
+            <strong>3MF für gemeinsamen Druckjob.</strong>
+            Datei → Export → Format <em>3MF</em>. Speicherort, Name <code>SnapBox-Set.3mf</code>. <em>OK</em>.
+            Diese Datei lässt sich in einen Slicer laden, beide Bauteile sind sofort getrennt platziert.
+          </li>
+
+          <li>
+            <strong>Refinement-Vergleich.</strong>
+            Exportiere die Box dreimal: einmal als <em>Low</em>, einmal <em>Medium</em>, einmal <em>High</em>. Vergleiche die Dateigrößen im Dateimanager.
+            Beobachtung: bei einer einfachen Box hilft <em>High</em> kaum, kostet aber Speicher.
+          </li>
+
+          <li>
+            <strong>Slicer-Test.</strong> Lade <code>SnapBox-Box.stl</code> in deinen Slicer.
+            Schau dir die Druckvorschau an: liegen Federarme flach? Schichtorientierung wie geplant?
+            Wenn nein: im Slicer rotieren, oder in Fusion das Design im CAD anders orientieren und neu exportieren.
+          </li>
+
+          <li>
+            <strong>Mesh-Reparatur (Demo).</strong>
+            Lade in einem neuen Fusion-Design eine fremde STL (z.&nbsp;B. ein heruntergeladenes Modell von Printables).
+            Wechsle in den Mesh-Workspace. <em>Modify → Inspect</em> zeigt eventuelle Defekte. <em>Modify → Repair</em> schließt offene Kanten.
+            Den parametrischen Workspace verlässt du dabei – Reparatur hat keine Timeline.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Du hast eine STL und eine 3MF im Slicer-Ordner, kennst die Größenunterschiede der Refinement-Stufen, und hast einmal den Mesh-Workspace betreten und wieder verlassen.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Multi-Color-Druck vorbereiten</h2>
+        <p>
+          Wenn du einen Drucker mit AMS / MMU hast: Exportiere den Aufbewahrungswürfel aus Modul 1 als 3MF.
+          Vor dem Export im Browser den Body in zwei <em>Components</em> aufteilen (Boden + Wände) – dazu rechtsklicken auf den Body, <em>Create Components from Bodies</em> – und im Slicer beiden Components verschiedene Farben zuweisen.
+        </p>
+        <p><strong>Akzeptanzkriterium:</strong> 3MF-Datei <code>Wuerfel-zweifarbig.3mf</code>, in deinem Slicer landen zwei Komponenten mit getrennt zuweisbaren Farben.</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Welche Refinement-Stufe ist für FDM meist optimal?</summary>
+          <div class="qa__body">Medium. High macht die Datei groß, ohne dass es im Druck (0,4er Düse, 0,2 mm Schicht) sichtbar wird.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Wann lohnt sich 3MF gegenüber STL?</summary>
+          <div class="qa__body">Wenn Multi-Material/Color, Maßeinheiten oder Slicer-Settings transportiert werden sollen. Auch wenn mehrere Bodies als ein „Set" erhalten bleiben sollen.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Was ist der Unterschied zwischen Mesh-Body und Solid-Body?</summary>
+          <div class="qa__body">Solid-Body = exakte CAD-Geometrie, parametrisch editierbar. Mesh-Body = Dreiecksnetz, nur grob bearbeitbar, keine Timeline.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Warum sollte man importierte STL nicht in Mesh-Body weiterbearbeiten?</summary>
+          <div class="qa__body">Mesh-Bearbeitung ist nicht parametrisch und produziert oft komplexe, schwer reparierbare Geometrie. Wenn das Original nicht passt, eher neu konstruieren als das Mesh umbauen.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Welche Slicer-Software unterstützt 3MF nativ?</summary>
+          <div class="qa__body">PrusaSlicer, Bambu Studio, Orca Slicer, neueres Cura. STL ist der kleinste gemeinsame Nenner und immer eine sichere Wahl, wenn Slicer-Kompatibilität unklar ist.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Pfad</th></tr></thead>
+            <tbody>
+              <tr><td>Body als Mesh exportieren</td><td>Browser-Rechtsklick → Save As Mesh</td></tr>
+              <tr><td>Ganze Datei exportieren</td><td>File → Export</td></tr>
+              <tr><td>Mesh-Workspace</td><td>Toolbar → Design → Mesh</td></tr>
+              <tr><td>Mesh reparieren</td><td>Mesh → Modify → Repair</td></tr>
+              <tr><td>Body zu Component</td><td>Browser-Rechtsklick auf Body → Create Components from Bodies</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>STL ist ein Bruchteil zu groß im Slicer</em> → Slicer hat „Inch" als Einheit angenommen. STL hat keine Einheit. Slicer-Setting prüfen.</li>
+            <li><em>Datei „explodiert" zu hunderten MB</em> → Refinement zu hoch. Auf Medium reduzieren.</li>
+            <li><em>Slicer findet „Multi Mesh"</em> → mehrere Bodies in einer STL. Im 3MF macht das Sinn, in STL eher nicht. Lieber <em>One file per body</em> exportieren.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-9DA64AB1-3CFE-4B05-B0EC-9DCD8F49F4E5" rel="noopener">Autodesk Help: Mesh Workspace</a></li>
+          <li><a href="https://help.prusa3d.com/article/file-formats_1827" rel="noopener">Prusa: File Formats explained</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schraubsitze und Heat-set Inserts · Modul 3, Lektion 3 · Fusion 360 Kurs</title>
+  <meta name="description" content="Durchgangsbohrungen, Senkköpfe, selbstschneidende Schrauben und Heat-set Inserts in Fusion 360 sauber konstruieren." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="schraubsitze"
+             data-module="3-3d-druck"
+             data-lesson-index="3">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 3</span> ›
+        Lektion 3
+      </p>
+      <h1 class="lesson__title">Schraub- und Muttersitze, Heat-set Inserts</h1>
+      <p class="lesson__meta">
+        <span>⏱ 45 Minuten</span>
+        <span>🎯 3D-Druck-Fokus</span>
+        <span>🔩 Mechanische Verbindungen</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich kenne die Standard-Bohrungstypen: Durchgang, Senkkopf, Sackloch.</li>
+          <li>Ich konstruiere Bohrungen mit dem Fusion <strong>Hole</strong>-Tool effizient.</li>
+          <li>Ich verstehe, wann <strong>selbstschneidende Schrauben</strong> ausreichen und wann nicht.</li>
+          <li>Ich plane Sitze für <strong>Heat-set Inserts</strong> (eingelötete Messinghülsen) korrekt ein.</li>
+          <li>Ich kenne die wichtigsten Maße für M3, M4, M5 in PLA.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Was ist ein Heat-set Insert?</summary>
+          <div class="qa__body">Eine kleine Messinghülse mit Innengewinde, die mit einem heißen Lötkolben in den vorgesehenen Sitz im 3D-gedruckten Bauteil gedrückt wird. Das Messing schmilzt das Plastik lokal und sitzt nach dem Erkalten fest. Ergebnis: ein metallisches Gewinde, das wiederholt geschraubt werden kann.</div>
+        </details>
+        <details class="qa">
+          <summary>Was ist eine selbstschneidende Schraube?</summary>
+          <div class="qa__body">Eine Schraube (oft mit aggressivem Gewinde, z.&nbsp;B. Spanplatten- oder Holzschraube), die sich beim Eindrehen ihr Gewinde selbst ins Plastik schneidet. Funktioniert für wenige Schraubzyklen, leiert dann aus.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Drei Wege, eine Schraube ins Druckteil zu bringen</h3>
+        <table class="cheatsheet" style="width:100%">
+          <tbody>
+            <tr><td><strong>Durchgang + Mutter</strong></td><td>Schraube von einer Seite, Mutter (versenkt oder lose) auf der anderen. Stabil, lösbar, immer empfehlenswert wenn Platz da ist.</td></tr>
+            <tr><td><strong>Selbstschneidend</strong></td><td>Schraube schneidet sich Gewinde ins Plastik. Schnell, kein Zubehör. Hält 5–10 Zyklen.</td></tr>
+            <tr><td><strong>Heat-set Insert</strong></td><td>Messinghülse mit Innengewinde wird eingeschmolzen. Hält dauerhaft, oft &gt; 100 Schraubzyklen. Braucht Lötkolben.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Bohrungstypen</h3>
+        <ul>
+          <li><strong>Durchgangsbohrung (Through Hole)</strong>: Schraube läuft komplett durch.</li>
+          <li><strong>Sackloch (Blind Hole)</strong>: Bohrung endet im Bauteil.</li>
+          <li><strong>Senkkopf (Counterbore)</strong>: zylindrische Vertiefung für Innensechskant- oder Zylinderkopfschrauben (DIN 912).</li>
+          <li><strong>Senkbohrung (Countersink)</strong>: konische Vertiefung für Senkkopfschrauben (DIN 7991).</li>
+        </ul>
+
+        <h3>Standardmaße M3, M4, M5 in PLA</h3>
+        <table class="cheatsheet" style="width:100%">
+          <thead><tr><th>Größe</th><th>Durchgang</th><th>Counterbore (DIN 912)</th><th>Heat-set Insert</th></tr></thead>
+          <tbody>
+            <tr><td>M3</td><td>⌀3,4 mm</td><td>⌀5,8 mm × 3 mm Tiefe</td><td>⌀4,0 mm × 4 mm Tiefe</td></tr>
+            <tr><td>M4</td><td>⌀4,4 mm</td><td>⌀7,3 mm × 4 mm Tiefe</td><td>⌀5,4 mm × 6 mm Tiefe</td></tr>
+            <tr><td>M5</td><td>⌀5,4 mm</td><td>⌀8,6 mm × 5 mm Tiefe</td><td>⌀6,4 mm × 8 mm Tiefe</td></tr>
+          </tbody>
+        </table>
+        <p>
+          Heat-set-Inserts gibt es in mehreren Bauformen (Voronoi-Knurl, Glatt, …). Die typischen <em>Knurled brass</em>-Inserts (z.&nbsp;B. <em>Ruthex</em> oder <em>Ying</em>) haben oben einen kleinen Bund, der minimal über das Bauteil hinausragen darf.
+        </p>
+
+        <h3>Selbstschneidend richtig auslegen</h3>
+        <ul>
+          <li>Bohrungsdurchmesser etwa <strong>Kerndurchmesser der Schraube</strong>: für M3 ≈ ⌀2,5 mm, für M4 ≈ ⌀3,3 mm.</li>
+          <li>Bohrungstiefe = Gewindelänge + 1 mm Reserve.</li>
+          <li>Wandstärke um die Bohrung mindestens <strong>2× Schraubendurchmesser</strong>, damit nichts platzt.</li>
+        </ul>
+
+        <h3>Heat-set Insert: Konstruktionsregeln</h3>
+        <ul>
+          <li>Sitz konisch nach oben (oben weiter, unten enger). Fusion: Sketch mit zwei Kreisen, Loft. Manche Konstrukteure lassen es zylindrisch und drücken das Insert einfach hinein – funktioniert, weniger sauber.</li>
+          <li>Tiefe = Insert-Höhe + 0,5–1 mm Reserve.</li>
+          <li>Wandstärke um den Insert mindestens 2 mm.</li>
+        </ul>
+
+        <div class="callout callout--note">
+          <strong>Hole-Tool nutzen</strong>
+          Statt Bohrungen als Cut-Extrude zu konstruieren, ist Fusion's <em>Hole</em>-Tool (Toolbar <em>Create → Hole</em>, oder per Werkzeugsuche <kbd>S</kbd> + „hole") sehr viel schneller. Es kennt Counterbore, Countersink, Tapped, Standardgrößen und kann Skizzenpunkte als Positionen verwenden.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – Schraubmontageblock</h2>
+        <p>Wir konstruieren einen kleinen Block, der alle drei Verbindungsarten zeigt.</p>
+
+        <ol class="steps">
+          <li>
+            <strong>Neues Design.</strong> <code>Lektion-3-3-Schraubmontage</code>.
+          </li>
+
+          <li>
+            <strong>Parameter.</strong>
+            <pre><code>// — Toleranzen aus Lektion 3.2 —
+clearance       = 0.20 mm
+m3_loch         = 3.4 mm
+m3_kerndurchm   = 2.5 mm   // für selbstschneidend
+m3_insert_d     = 4.0 mm   // Standard Knurled Insert
+m3_insert_h     = 4.0 mm
+
+// — Block —
+block_b   = 60 mm
+block_t   = 30 mm
+block_h   = 12 mm</code></pre>
+          </li>
+
+          <li>
+            <strong>Block.</strong> Skizze auf XY: Rechteck zentrisch, <code>block_b × block_t</code>. Extrudieren symmetrisch <code>block_h / 2</code>.
+          </li>
+
+          <li>
+            <strong>Variante A – Durchgang mit Counterbore.</strong>
+            <em>Create → Hole</em>. Klicke auf die Oberseite des Blocks am linken Drittelpunkt.
+            Im Hole-Dialog:
+            <ul>
+              <li>Hole Type: <em>Counterbore</em>.</li>
+              <li>Diameter (Counterbore): 5,8 mm, Depth: 3 mm.</li>
+              <li>Diameter (Hole): 3,4 mm.</li>
+              <li>Extents: <em>All</em> (Durchgang).</li>
+            </ul>
+            <em>OK</em>.
+            Diese Bohrung passt für eine M3-Innensechskantschraube DIN 912; Kopf liegt bündig.
+          </li>
+
+          <li>
+            <strong>Variante B – Selbstschneidend.</strong>
+            Hole-Tool erneut, am mittleren Drittelpunkt:
+            <ul>
+              <li>Hole Type: <em>Simple</em>.</li>
+              <li>Diameter: 2,5 mm.</li>
+              <li>Extents: <em>Distance</em>, Tiefe = 8 mm.</li>
+            </ul>
+            <em>OK</em>.
+            Hier dreht sich später eine selbstschneidende M3-Schraube ein.
+          </li>
+
+          <li>
+            <strong>Variante C – Heat-set Insert.</strong>
+            Hole-Tool, am rechten Drittelpunkt:
+            <ul>
+              <li>Hole Type: <em>Simple</em>.</li>
+              <li>Diameter: 4,0 mm.</li>
+              <li>Extents: <em>Distance</em>, Tiefe = 5 mm (Insert + Reserve).</li>
+            </ul>
+            <em>OK</em>.
+            Optional: kleinen Konus am oberen Bohrungsrand: Skizze auf Oberseite, kleinerer Kreis ⌀3,8 mm konzentrisch zur Bohrung, Cut-Extrude 1 mm tief mit <em>Taper Angle</em> -10°. So führt sich der Insert beim Eindrücken besser ein.
+          </li>
+
+          <li>
+            <strong>Beschriftung.</strong> Per Sketch + Text + Cut-Extrude jede Bohrung beschriften: „M3 ⌀5.8" / „M3 selbst" / „M3 Insert".
+            Schriftgröße 4 mm, Tiefe 0,4 mm.
+          </li>
+
+          <li>
+            <strong>Stresstest.</strong> Ändere <code>m3_loch</code> auf 3,2 mm – Variante A reagiert (war ja nicht parametrisch verlinkt). Damit die Bohrungen konsistent zu den Toleranzen bleiben, kannst du in den Hole-Dialogen die Werte gegen die Parameter austauschen.
+            <div class="callout">
+              <strong>Tipp</strong>
+              Im Hole-Dialog kannst du im Diameter-Feld den Parameternamen tippen statt einer Zahl. Dann ist auch das Hole-Feature parametrisch.
+            </div>
+          </li>
+
+          <li>
+            <strong>Speichern.</strong>
+          </li>
+        </ol>
+
+        <h3>Bonus – Ecken-Schraubdom</h3>
+        <p>
+          Konstruiere zusätzlich einen <em>Schraubdom</em>: einen kleinen Zylinder im Inneren eines Gehäuses, in dem eine Heat-set-Bohrung sitzt.
+          Außendurchmesser des Doms = <code>m3_insert_d + 4 mm</code> (also ⌀8 mm). Höhe gleich der Innenhöhe des Gehäuses.
+          Drei Verstärkungsrippen, die vom Dom an die Gehäusewand gehen, sorgen für Steifigkeit.
+        </p>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Ein Block, der drei Schraubsitze parallel zeigt. Du kannst ihn drucken und alle drei Varianten ausprobieren – idealerweise mit deinen Lieblings-M3-Schrauben aus dem Werkstattregal.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Gehäusedeckel</h2>
+        <p>
+          Konstruiere einen einfachen Gehäusedeckel 80×60×3 mm mit:
+        </p>
+        <ul>
+          <li>Vier M3-Senkkopfbohrungen (DIN 7991) in den Ecken, je 8 mm vom Rand. Hole-Type: <em>Countersink</em>, ⌀ Loch 3,4 mm, ⌀ Senkung 6,8 mm, Winkel 90°.</li>
+          <li>Eine zentrale Aussparung 30×20 mm für eine LED oder einen Schalter.</li>
+          <li>Bodenchamfer 0,4 mm.</li>
+          <li>Wandstärke um die Bohrungen mindestens 6 mm.</li>
+        </ul>
+        <p><strong>Akzeptanzkriterium:</strong> Deckel wäre druckbar (flach liegend, Senkungen nach oben), Schraubenköpfe würden bündig versinken.</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Welcher Bohrungsdurchmesser für eine M3-Durchgangsbohrung in PLA?</summary>
+          <div class="qa__body">⌀3,4 mm – also der Nenndurchmesser plus 0,4 mm Clearance. Bei sehr maßhaltigen Druckern reicht 3,2 mm.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Welcher Bohrungsdurchmesser für M3-selbstschneidend?</summary>
+          <div class="qa__body">Etwa der Kerndurchmesser, ca. ⌀2,5 mm. Bei zu engen Bohrungen sprengt die Schraube das Bauteil; bei zu weiten hält das Gewinde nicht.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Wann wählst du Heat-set Inserts?</summary>
+          <div class="qa__body">Wenn das Bauteil mehr als 5–10 Mal verschraubt wird, wenn höhere Drehmomente nötig sind, oder wenn Vibration die Verbindung lockern könnte. Klassiker: Gehäusedeckel, abnehmbare Adapter, Werkzeughalter.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Was ist der Unterschied zwischen Counterbore und Countersink?</summary>
+          <div class="qa__body">Counterbore = zylindrische Vertiefung, passend für Innensechskantschrauben (DIN 912). Countersink = konische Vertiefung, passend für Senkkopfschrauben (DIN 7991).</div>
+        </details>
+        <details class="qa">
+          <summary>5. Warum konstruiert man den Insert-Sitz leicht konisch?</summary>
+          <div class="qa__body">Damit der heiße Insert beim Einsetzen geführt wird und mittig sitzt. Außerdem nimmt der konische Sitz das verdrängte Plastik auf – der Insert läuft nicht über.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Pfad</th></tr></thead>
+            <tbody>
+              <tr><td>Hole-Tool</td><td>Create → Hole, oder <kbd>S</kbd> → „hole"</td></tr>
+              <tr><td>Skizzenpunkt als Bohrposition</td><td>Sketch → Point, dann Hole referenziert ihn automatisch</td></tr>
+              <tr><td>Text in Skizze</td><td>Sketch → Create → Text</td></tr>
+              <tr><td>Konische Bohrung</td><td>Hole-Dialog: Drill Point + Drill Angle, oder Cut-Extrude mit Taper Angle</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>Insert-Sitz reißt aus</em> → zu wenig Wand drumherum. Mindestens 2 mm Material rings um den Insert vorsehen.</li>
+            <li><em>Schraube zieht nicht an</em> → Bohrungstiefe für Selbstschneidende zu kurz. Tiefe = Gewindelänge + 1 mm Reserve.</li>
+            <li><em>Senkkopf schaut über</em> → Senkungsdurchmesser zu klein für die konkrete Schraube. Lieber 0,2 mm größer als zu klein.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://hackaday.com/2020/04/06/heat-set-inserts-the-bridge-between-3d-printing-and-the-real-world/" rel="noopener">Hackaday: Heat-set Inserts in der Praxis</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=heat+set+inserts+3d+printing" rel="noopener">YouTube: Heat-set Inserts richtig einsetzen</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

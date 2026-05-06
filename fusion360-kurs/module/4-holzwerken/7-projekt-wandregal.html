@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projekt – Wandregal · Modul 4, Lektion 7 · Fusion 360 Kurs</title>
+  <meta name="description" content="Modul-4-Abschlussprojekt: parametrisches Wandregal aus Multiplex mit Werkstattzeichnung, Stückliste und DXF-Export." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="projekt-wandregal"
+             data-module="4-holzwerken"
+             data-lesson-index="7">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 4</span> ›
+        Lektion 7
+      </p>
+      <h1 class="lesson__title">Projekt: Wandregal aus Multiplex</h1>
+      <p class="lesson__meta">
+        <span>⏱ 60 Minuten</span>
+        <span>🎯 Modul-Abschluss</span>
+        <span>🪵 Reales Möbelstück</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich konstruiere ein vollständiges <strong>Wandregal</strong> aus mehreren Plattenkomponenten.</li>
+          <li>Ich verbinde Bauteile per <strong>Fingerzinken</strong> oder <strong>Schrauben</strong> sauber parametrisch.</li>
+          <li>Ich erstelle eine vollständige <strong>Werkstattzeichnung</strong> mit Bemaßung und BOM.</li>
+          <li>Ich exportiere <strong>DXF</strong> für CNC oder Lasercutter und ein <strong>PDF</strong> der Drawing.</li>
+          <li>Ich plane eine sinnvolle <strong>Wandbefestigung</strong> (French Cleat oder Aufhängeschiene).</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Was ist ein French Cleat?</summary>
+          <div class="qa__body">Eine 45°-gekippte Leiste an der Wand und ein passendes Gegenstück am Möbel. Das Möbel wird einfach eingehängt – sehr stabil, präzise zu positionieren, demontierbar. In Modul 6 vertiefen wir das nochmal als generelles Werkstattprinzip.</div>
+        </details>
+        <details class="qa">
+          <summary>Wie schwer kann ein Wandregal aus 18-mm-Multiplex tragen?</summary>
+          <div class="qa__body">Bei sauberer Befestigung an Schrauben in eine Massivwand mit Dübeln spielt eher die Wandbefestigung als das Holz die Rolle. Faustregel: ≥ 20 kg pro Befestigungspunkt bei M6-Schrauben in Vollziegel.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Konzept</h3>
+        <p>
+          Ein parametrisches Wandregal mit drei Bauteilen:
+        </p>
+        <ul>
+          <li><strong>Boden</strong> – die obere Auflagefläche (sichtbar).</li>
+          <li><strong>Linke Seite</strong> und <strong>rechte Seite</strong> – senkrechte Wangen.</li>
+          <li><strong>Rückwand</strong> (optional, dünn) – Versteifung und Staubschutz.</li>
+        </ul>
+        <p>
+          Verbindungen per Fingerzinken zwischen Boden und Seiten. Rückwand in Nut. Befestigung an der Wand per French Cleat in der Rückwand.
+        </p>
+
+        <h3>Hauptmaße (alle parametrisch)</h3>
+        <pre><code>brett_dicke    = 18 mm
+rueck_dicke    = 6 mm
+
+regal_b        = 600 mm    Außenbreite
+regal_t        = 200 mm    Tiefe (vorne–hinten)
+regal_h        = 250 mm    Außenhöhe
+
+finger_n       = 5         Fingerzinken pro Verbindung
+fuge           = 0.10 mm
+nut_tiefe      = 8 mm
+
+cleat_winkel   = 45 deg
+cleat_b        = 60 mm     Breite der Cleat-Leiste</code></pre>
+
+        <h3>Konstruktionsreihenfolge</h3>
+        <ol>
+          <li>Top-Level-Component <code>Wandregal</code> als Baugruppen-Kontainer.</li>
+          <li>Sub-Component <code>Boden</code>, <code>Seite-links</code>, <code>Seite-rechts</code>, <code>Rueckwand</code>, <code>Cleat-Wandseite</code>, <code>Cleat-Regalseite</code>.</li>
+          <li>Plattengeometrie als einfache extrudierte Rechtecke.</li>
+          <li>Fingerzinken zwischen Seiten und Boden.</li>
+          <li>Nut für Rückwand in beiden Seiten und im Boden.</li>
+          <li>French Cleat als zwei separate Komponenten – die Cleat-Wandseite gehört nicht zum Möbel, ist aber wichtig in der Drawing.</li>
+        </ol>
+
+        <div class="callout callout--note">
+          <strong>Pragmatischer Tipp</strong>
+          Wenn dir Fingerzinken zu zeitaufwändig sind: Lass sie weg und konstruiere mit Korpusverschraubung (vorbohren + Spax). Dann liegt der Lerneffekt auf Drawing/BOM/DXF und du kommst schneller in die Werkstatt. Du kannst auch beide Varianten als Configuration anbieten – aber Configurations sind ein Modul-5-Thema.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung</h2>
+
+        <ol class="steps">
+          <li>
+            <strong>Neues Design.</strong> Im Projekt <em>Holzwerken</em> ein Design <code>Lektion-4-7-Wandregal</code>. Save.
+          </li>
+
+          <li>
+            <strong>Parameter anlegen.</strong> Modify → Change Parameters. Den Block aus dem Theorie-Teil eintippen.
+          </li>
+
+          <li>
+            <strong>Top-Level-Component.</strong>
+            Browser-Rechtsklick auf den Top-Eintrag → <em>New Component</em>. Name: <code>Wandregal</code>. Aktivieren.
+          </li>
+
+          <li>
+            <strong>Boden konstruieren.</strong>
+            New Component <code>Boden</code> innerhalb von <em>Wandregal</em>.
+            Skizze auf XY: Rechteck zentrisch, <code>regal_b × regal_t</code>. Skizze schließen, extrudieren <code>brett_dicke</code> nach oben.
+            Material zuweisen: Multiplex Birke 18 mm.
+          </li>
+
+          <li>
+            <strong>Seite-links.</strong>
+            New Component <code>Seite-links</code>. Skizze auf YZ-Ebene: Rechteck mit <code>regal_t × regal_h</code>. Skizze auf der linken Seite des Bodens platzieren (untere Kante koinzident mit Bodenoberseite).
+            Skizze schließen, extrudieren <code>brett_dicke</code> nach links (also vom Bodenkörper weg). Operation: New Component / oder erst New Body und Component übernehmen.
+            Achte darauf: die Seite ist <em>außen</em> vom Boden, sodass der Boden zwischen den Seiten sitzt.
+            <div class="callout">
+              <strong>Boden zwischen Seiten oder Seiten auf Boden?</strong>
+              Hier gehen wir den Weg „Boden zwischen Seiten" – die Seiten reichen von ganz unten bis ganz oben, der Boden sitzt zwischen ihnen. Bei Bedarf in der eigenen Variante umkehren.
+            </div>
+          </li>
+
+          <li>
+            <strong>Seite-rechts.</strong> Spiegeln per <em>Mirror</em>. Type: Components. Object: Seite-links. Plane: YZ-Origin (oder Midplane zwischen Seiten). <em>OK</em>. Component umbenennen zu <code>Seite-rechts</code>.
+          </li>
+
+          <li>
+            <strong>Fingerzinken (alternativ Schrauben).</strong>
+            Auf der Innenfläche der linken Seite eine Skizze (an der Stelle, wo der Boden anstößt).
+            Zeichne ein Rechteck mit Breite = <code>regal_t / finger_n</code>, Höhe = <code>brett_dicke</code>.
+            Position: oberster Finger an der Vorderkante.
+            Skizze schließen, Cut-Extrude Tiefe <code>brett_dicke + fuge</code>.
+            Pattern: Quantity = <code>floor((finger_n + 1) / 2)</code>, Distance = <code>2 * regal_t / finger_n</code>, entlang Y-Achse.
+            Mirror auf rechte Seite.
+          </li>
+
+          <li>
+            <strong>Gegenfinger im Boden.</strong>
+            Auf der linken Stirnfläche des Bodens eine Skizze. Zeichne genauso ein Cut-Rechteck, aber an versetzter Position (sodass die Lücken oben/Mitte/unten genau auf die <em>Finger</em> der Seiten passen, nicht auf die Lücken).
+            Cut-Extrude Tiefe <code>brett_dicke + fuge</code>. Pattern wie zuvor.
+            Mirror auf die rechte Stirnseite.
+          </li>
+
+          <li>
+            <strong>Nut für die Rückwand.</strong>
+            Auf der Rückseite der Seiten eine Skizze: schmaler Streifen mit Breite = <code>rueck_dicke + fuge</code>, vertikal über die ganze Höhe.
+            Position: <code>rueck_dicke + 5 mm</code> von der hinteren Außenkante (damit Cleat dahinter Platz hat).
+            Cut-Extrude Tiefe = <code>nut_tiefe</code>.
+            Spiegeln auf andere Seite. Identische Nut auf der hinteren Stirnseite des Bodens.
+          </li>
+
+          <li>
+            <strong>Rückwand.</strong>
+            New Component <code>Rueckwand</code>. Skizze auf XZ-Ebene innerhalb der Nut. Rechteck mit Breite passend zur Nutbreite-Spanne und Höhe regal_h.
+            Skizze schließen, extrudieren <code>rueck_dicke</code> nach hinten.
+            Material: Multiplex 6 mm.
+          </li>
+
+          <li>
+            <strong>French Cleat.</strong>
+            Zwei Komponenten:
+            <ul>
+              <li><code>Cleat-Regalseite</code>: an der Rückseite des Regals (an der Rückwand) befestigt. Querschnitt: ein 45°-Trapez mit Breite <code>cleat_b</code>.</li>
+              <li><code>Cleat-Wandseite</code>: spiegelbildlich, an der Wand befestigt.</li>
+            </ul>
+            Skizze auf XZ: zwei spiegelbildliche Trapeze (45° gekippte Schmalseite jeweils nach unten/oben). Extrudieren auf Regalbreite <code>regal_b - 40 mm</code> (etwas kürzer, damit es seitlich nicht raussteht).
+          </li>
+
+          <li>
+            <strong>Befestigungsbohrungen im Cleat.</strong>
+            Im Cleat-Wandseite-Body: drei Hole-Tool-Bohrungen mit Senkkopf für M6-Schrauben (zur Wand). Rastermaß 200 mm.
+            Im Cleat-Regalseite: vier Hole-Tool-Bohrungen 4 mm zur Verschraubung an der Rückwand.
+          </li>
+
+          <li>
+            <strong>Material zuweisen, Components beschriften.</strong>
+            Jede Component-Properties öffnen, Description, Part Number, Material setzen (vgl. Lektion 4.5).
+          </li>
+
+          <li>
+            <strong>Drawing erstellen.</strong>
+            Workspace → Drawing → From Design. ISO, A3 Landscape.
+            Sheet 1: Übersicht mit Iso, BOM, Maße der Außenhülle.
+            Sheet 2: Boden mit allen Maßen, Fingerzinken-Detail.
+            Sheet 3: Seite (links/rechts gespiegelt → ein Sheet reicht, mit Hinweis „2× spiegelbildlich").
+            Sheet 4: Rückwand und Cleat-Set.
+          </li>
+
+          <li>
+            <strong>BOM einfügen.</strong> Sheet 1 → <em>Tables → Parts List</em>. Spalten anpassen: Item, Quantity, Part Number, Description, Material, Maße LxBxD.
+            Maße manuell aus den Properties oder Bounding Boxes übernehmen.
+          </li>
+
+          <li>
+            <strong>Balloons.</strong> An jedem Bauteil in der Iso-Ansicht eine Ballonnummer. <kbd>Esc</kbd>.
+          </li>
+
+          <li>
+            <strong>PDF und CSV exportieren.</strong>
+            Output → Output PDF, alle Sheets. Tabelle rechtsklicken → Export → CSV.
+          </li>
+
+          <li>
+            <strong>DXF für Zuschnitt.</strong>
+            Im Design-Workspace zurück. Für jedes Bauteil eine Skizze mit Project der Außenkontur erstellen. Per Rechtsklick „Save as DXF" exportieren.
+            Optional: ein Nesting-DXF wie in Transferaufgabe 4.6.
+          </li>
+
+          <li>
+            <strong>Speichern.</strong> Versionskommentar: <em>„Wandregal v1, fertig dokumentiert"</em>.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Vollständiges Wandregal mit allen Verbindungen, eine PDF-Werkstattzeichnung mit BOM, eine CSV-Stückliste, DXF-Dateien für jeden Zuschnitt – und ein parametrisches Modell, das du jederzeit in andere Größen änderst.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – andere Maße, andere Sprache</h2>
+        <p>
+          Variiere das Modell:
+        </p>
+        <ul>
+          <li>Stelle das Regal auf 1000 mm Breite und 350 mm Tiefe um – nur Parameter ändern.</li>
+          <li>Füge einen mittigen Einlegeboden hinzu (in den Seiten als Nut, oder per Bodenträgern für Höhenverstellung).</li>
+          <li>Wechsle die Verbindung von Fingerzinken auf einfache Korpusschrauben (Variante mit verschraubten Seiten an Boden) – schneller in der Werkstatt.</li>
+          <li>Drucke neue Werkstattzeichnung und neue Stückliste.</li>
+        </ul>
+        <p><strong>Akzeptanzkriterium:</strong> Die größere Variante hat alle Maße korrekt aktualisiert, BOM zeigt neue Plattenmaße, alle DXFs neu exportiert.</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Warum konstruieren wir „Boden zwischen Seiten"?</summary>
+          <div class="qa__body">Last des Bodens trifft auf die Stirnholzfläche der Seiten – das ist eine sehr gute Lastabtragung. Außerdem sieht man von vorne nicht das Stirnholz des Bodens.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Welche Verbindung ist hier robust und einfach genug?</summary>
+          <div class="qa__body">Korpusschrauben (Spax) durch die Seiten in den Boden, vorgebohrt. Fingerzinken sind schöner, brauchen aber Vorrichtung oder gute Vorlagen.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Wofür ist die Nut für die Rückwand?</summary>
+          <div class="qa__body">Sie nimmt die dünne Rückwand auf und hält sie versteckt hinter den Seiten. Versteift den Korpus erheblich gegen Verzug.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Wie hängt das Regal an der Wand?</summary>
+          <div class="qa__body">Die Cleat-Wandseite wird mit Schrauben in der Wand befestigt. Die Cleat-Regalseite ist auf der Rückwand des Regals befestigt. Beim Aufhängen rutscht das Regal von oben auf den 45°-Cleat – das hält durch Schwerkraft.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Was ist der Vorteil eines parametrischen Wandregals?</summary>
+          <div class="qa__body">Wenn dein nächstes Regal 800 mm breit werden soll: einen Parameter ändern, neue PDFs und DXFs exportieren, fertig. Keine Stunde Neukonstruktion.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Modul-4-Skill</th><th>Anwendung im Projekt</th></tr></thead>
+            <tbody>
+              <tr><td>Materialien</td><td>Multiplex 18 mm + Multiplex 6 mm Rückwand</td></tr>
+              <tr><td>Holzverbindungen</td><td>Fingerzinken Boden ↔ Seiten</td></tr>
+              <tr><td>Plattenwerkstoff</td><td>Reale Plattendicke als Parameter</td></tr>
+              <tr><td>Drawings</td><td>Vier Sheets: Übersicht + Bauteile</td></tr>
+              <tr><td>Stücklisten</td><td>BOM mit Material- und Maßspalten, CSV-Export</td></tr>
+              <tr><td>CNC/Laser-Export</td><td>DXF pro Bauteil oder Nesting</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Werkstatt-Tipps</strong></p>
+          <ul>
+            <li>Multiplex vor der Verleimung trocken zusammenstecken – wenn etwas klemmt, lässt es sich noch korrigieren.</li>
+            <li>Stirnholzkanten von Multiplex sind splitteranfällig. Vor dem Sägen Klebeband auf die Schnittlinie kleben.</li>
+            <li>Wandbefestigung: nicht in Trockenbau ohne Hohlraumdübel. Bei Massivwand: M6 in 8-mm-Loch mit 50-mm-Dübel.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://www.youtube.com/results?search_query=french+cleat+system+woodworking" rel="noopener">YouTube: French Cleat in der Werkstatt</a></li>
+          <li><a href="https://www.printables.com/" rel="noopener">Printables – kombinierbare Holz-Druckteil-Projekte</a></li>
+        </ul>
+      </section>
+
+      <div class="callout callout--note" style="margin-top:1.5rem">
+        <strong>🎉 Modul 4 abgeschlossen</strong>
+        Du beherrscht den Holzwerker-Workflow: Materialien, Verbindungen, Plattenwerkstoffe, Drawings, Stücklisten, CNC/Laser-Export.
+        Im nächsten Modul lernst du Baugruppen mit echten Joints kennen – damit Bauteile in Fusion <em>tatsächlich</em> miteinander beweglich verbunden werden.
+      </div>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

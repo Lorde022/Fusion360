@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Holz in Fusion – Materialien · Modul 4, Lektion 1 · Fusion 360 Kurs</title>
+  <meta name="description" content="Materialien und Appearances in Fusion 360 für Holz: Eiche, Buche, Multiplex realistisch darstellen und korrekt für die Stückliste hinterlegen." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="materialien"
+             data-module="4-holzwerken"
+             data-lesson-index="1">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 4</span> ›
+        Lektion 1
+      </p>
+      <h1 class="lesson__title">Holz in Fusion: Materialien und Appearance</h1>
+      <p class="lesson__meta">
+        <span>⏱ 30 Minuten</span>
+        <span>🎯 Holzwerken-Fokus</span>
+        <span>🪵 Materialien</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich verstehe den Unterschied zwischen <strong>Material</strong> und <strong>Appearance</strong>.</li>
+          <li>Ich weise einem Bauteil ein Holzmaterial zu und ändere die Darstellung gezielt.</li>
+          <li>Ich nutze die <strong>Library</strong> für Eigene Materialien und finde Eiche, Buche, Multiplex etc.</li>
+          <li>Ich richte die <strong>Texturausrichtung</strong> (Maserungsrichtung) sinnvoll an realer Verwendung aus.</li>
+          <li>Ich weiß, warum korrekt zugewiesenes Material für die Stückliste relevant ist.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Was ist eine Appearance?</summary>
+          <div class="qa__body">Die Appearance ist die <em>visuelle</em> Darstellung – Farbe, Textur, Glanz. Sie ist rein optisch und beeinflusst keine Berechnungen.</div>
+        </details>
+        <details class="qa">
+          <summary>Was ist ein Material?</summary>
+          <div class="qa__body">Ein Material trägt physikalische Eigenschaften – Dichte, Elastizität, Wärmeleitung. Fusion nutzt Materialien für Massenermittlung, Schwerpunkt, Simulation und Stücklisten.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Material vs. Appearance</h3>
+        <table class="cheatsheet" style="width:100%">
+          <tbody>
+            <tr><td><strong>Material (Physical)</strong></td><td>Dichte, E-Modul, Festigkeit. Bestimmt Gewicht und Stücklisten-Eintrag.</td></tr>
+            <tr><td><strong>Appearance (Visual)</strong></td><td>Farbe, Textur, Reflexion. Nur fürs Aussehen.</td></tr>
+          </tbody>
+        </table>
+        <p>
+          Du kannst beides unabhängig setzen. Ein Buchenholz-Bauteil mit weißer Lackierung: Material = Buche (für Gewicht), Appearance = weiß lackiert. Stückliste sagt „Buche", Render sagt „weißes Möbel".
+        </p>
+
+        <h3>Wo liegen die Bibliotheken?</h3>
+        <ul>
+          <li><strong>Fusion 360 Material Library</strong> – mitgeliefert. Öffnest du via <em>Modify → Manage Materials</em>. Enthält Wood-Sektion mit Maple, Oak, Pine, Plywood etc.</li>
+          <li><strong>Fusion 360 Appearance Library</strong> – via <em>Modify → Appearance</em> (Hotkey <kbd>A</kbd>).</li>
+          <li><strong>My Library</strong> – deine eigene, persistierte Bibliothek. Hier sicherst du deine Lieblingsmaterialien für künftige Projekte.</li>
+        </ul>
+
+        <h3>Material zuweisen</h3>
+        <p>
+          <em>Modify → Physical Material</em> öffnet die Materialbibliothek. Per Drag-and-drop ziehst du ein Material auf einen Body oder eine Component. Im Browser erscheint das Material als Eigenschaft.
+        </p>
+
+        <h3>Appearance zuweisen</h3>
+        <p>
+          <em>Modify → Appearance</em> oder <kbd>A</kbd>. Auch hier Drag-and-drop. Wichtig: du kannst Appearance auf <strong>Body</strong>, <strong>Component</strong>, <strong>Face</strong> oder <strong>Bodies</strong> zuweisen – Faces nur, wenn du eine einzelne Fläche anders färben willst (z.&nbsp;B. lackierte Front).
+        </p>
+
+        <h3>Texturausrichtung</h3>
+        <p>
+          Nach Appearance-Zuweisung im Browser: das Element auswählen, <em>Modify → Texture Map Controls</em>. Du kannst die Holzmaserung drehen, skalieren und verschieben.
+          Konventionsgemäß läuft die Maserung <strong>entlang der längsten Bauteilkante</strong> – außer du baust z.&nbsp;B. Hirnholz-Optik.
+        </p>
+
+        <h3>Eigene Holzmaterialien</h3>
+        <p>
+          Standard-Bibliotheksmaterial passt nicht 1:1 zu deinem Lieblings-Multiplex? Du kannst Materialien <strong>duplizieren und anpassen</strong>:
+        </p>
+        <ol>
+          <li>Manage Materials → Material rechtsklick → <em>Duplicate</em>.</li>
+          <li>Eigenschaften ändern: Dichte (z.&nbsp;B. 600 kg/m³ für Birkensperrholz), Name (z.&nbsp;B. „Multiplex Birke 18mm").</li>
+          <li>In <em>My Library</em> ablegen, damit es projektübergreifend verfügbar ist.</li>
+        </ol>
+
+        <div class="callout callout--note">
+          <strong>Warum sich der Aufwand lohnt</strong>
+          Mit korrekt zugewiesenen Materialien rechnet Fusion automatisch das <strong>Gewicht</strong> deiner Bauteile. Bei einem Schrank mit Multiplex-Korpus weißt du auf einen Blick, ob der allein zu zweit zu tragen ist. Auch die <strong>Stückliste</strong> in Modul 4.5 nutzt dieses Material als Spalte.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – Brett mit echtem Holz</h2>
+
+        <ol class="steps">
+          <li>
+            <strong>Neues Design.</strong> Im Projekt <em>Holzwerken</em> ein Design <code>Lektion-4-1-Brett</code> anlegen.
+          </li>
+          <li>
+            <strong>Brett konstruieren.</strong> Skizze auf XY: Rechteck 600×200, zentrisch. Skizze schließen, extrudieren <strong>symmetrisch</strong> 18 mm. (Real-Maß für Multiplex 18 mm.)
+          </li>
+          <li>
+            <strong>Material zuweisen.</strong> <em>Modify → Physical Material</em>. In der Library nach <em>Wood (Plywood)</em> suchen. Per Drag-and-drop auf den Body. Schließen.
+            <div class="callout">
+              <strong>Falls keine Library lädt</strong>
+              <em>Library</em>-Eintrag links auswählen, in der Suchzeile „plywood" oder „oak" eingeben. Manche Materialien werden bei der ersten Nutzung nachgeladen.
+            </div>
+          </li>
+          <li>
+            <strong>Gewicht prüfen.</strong> <em>Inspect → Properties</em>. Du siehst Volumen, Masse, Schwerpunkt. Bei 600×200×18 mm Multiplex sollten ca. 1,3 kg angezeigt werden.
+          </li>
+          <li>
+            <strong>Appearance feinjustieren.</strong> <kbd>A</kbd>. Unter <em>Library → Wood</em> ein Holz auswählen, das deinem Wunsch nahekommt (z.&nbsp;B. <em>Birch - Natural - Glossy</em>). Per Drag-and-drop auf den Body.
+          </li>
+          <li>
+            <strong>Maserung ausrichten.</strong> Body auswählen → <em>Modify → Texture Map Controls</em>. Drehe die Maserung um 90° und beobachte: läuft die Faser entlang der kurzen oder langen Seite? Wähle entlang der langen Seite.
+          </li>
+          <li>
+            <strong>Eigenes Material anlegen.</strong> <em>Modify → Manage Materials</em>. <em>Plywood</em> rechtsklick → <em>Duplicate</em>. Im neuen Eintrag:
+            <ul>
+              <li>Name: <em>Multiplex Birke 18mm</em>.</li>
+              <li>Density: 680 kg/m³ (typisch für Birken-Multiplex).</li>
+              <li>Im selben Dialog auf <em>Add to Favorites</em> oder in <em>My Library</em> ziehen.</li>
+            </ul>
+            Schließen.
+          </li>
+          <li>
+            <strong>Eigenes Material auf Body anwenden.</strong> Drag-and-drop deines neuen Materials. Properties erneut prüfen – Masse hat sich an die neue Dichte angepasst.
+          </li>
+          <li>
+            <strong>Speichern.</strong>
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Brett mit korrektem Material (eigene Multiplex-Variante) und realistischer Holz-Appearance, Maserung längs zur 600-mm-Kante.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe</h2>
+        <p>
+          Lege drei Materialvarianten in <em>My Library</em> an: <em>Multiplex Birke 15mm</em>, <em>MDF 19mm</em>, <em>Massivholz Eiche</em>. Realistische Dichten:
+        </p>
+        <ul>
+          <li>Multiplex Birke: ~680 kg/m³.</li>
+          <li>MDF: ~750 kg/m³.</li>
+          <li>Eiche massiv: ~700 kg/m³.</li>
+        </ul>
+        <p>
+          Erstelle drei identische Bretter (300×100×15) und weise jeweils ein Material zu. Vergleiche die Massen.
+        </p>
+        <p><strong>Akzeptanzkriterium:</strong> Drei Bodies, drei verschiedene Materialien, drei plausible Massewerte (zwischen 0,3 und 0,5 kg).</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Wofür ist Material relevant, wofür Appearance?</summary>
+          <div class="qa__body">Material → Gewicht, Stückliste, Simulation. Appearance → Optik im Render und in der Vorschau. Beide unabhängig.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Wie änderst du die Maserungsrichtung?</summary>
+          <div class="qa__body">Appearance zuweisen, Body auswählen, <em>Modify → Texture Map Controls</em>. Drehen, skalieren, verschieben. Tipp: Maserung entlang der längsten Kante.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Warum eigene Materialien duplizieren?</summary>
+          <div class="qa__body">Damit Dichte und Bezeichnung zu deinem realen Werkstoff passen. Stückliste und Massenwerte werden dadurch korrekt – Standard-Plywood ist nur eine grobe Annäherung.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Können zwei Bauteile dasselbe Material, aber verschiedene Appearance haben?</summary>
+          <div class="qa__body">Ja. Eine lackierte und eine geölte Eiche haben dasselbe Material (Eiche), unterschiedliche Appearance.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Wo speichert Fusion deine eigenen Materialien?</summary>
+          <div class="qa__body">In <em>My Library</em>, projektübergreifend an deinem Account. Wenn du auf einem anderen Rechner einloggst, sind sie dort ebenfalls verfügbar.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Pfad / Hotkey</th></tr></thead>
+            <tbody>
+              <tr><td>Material zuweisen</td><td>Modify → Physical Material</td></tr>
+              <tr><td>Appearance zuweisen</td><td><kbd>A</kbd> oder Modify → Appearance</td></tr>
+              <tr><td>Materialien verwalten</td><td>Modify → Manage Materials</td></tr>
+              <tr><td>Maserung ausrichten</td><td>Modify → Texture Map Controls</td></tr>
+              <tr><td>Massen anzeigen</td><td>Inspect → Properties</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>Body bleibt grau</em> → Library nicht geladen, Internet kurz prüfen, dann erneut zuweisen.</li>
+            <li><em>Maserung wirkt zu groß/klein</em> → Texture Map Controls → Scale anpassen, oft 0.3–0.6 für realistische Holzmaserung.</li>
+            <li><em>Falsche Masse in Properties</em> → Material noch nicht zugewiesen oder noch Default „Aluminum". Erst Material setzen, dann messen.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-3F1A91A0-7C3A-4F23-95F7-6E92F7DDB85A" rel="noopener">Autodesk Help: Materials</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=fusion+360+wood+appearance+texture" rel="noopener">YouTube: Holz-Appearances in der Praxis</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

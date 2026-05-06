@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interface, Navigation und Timeline · Modul 1, Lektion 2 · Fusion 360 Kurs</title>
+  <meta name="description" content="Workspaces, Browser, ViewCube, Maus-Navigation und Timeline in Fusion 360 sicher beherrschen." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="interface"
+             data-module="1-grundlagen"
+             data-lesson-index="2">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 1</span> ›
+        Lektion 2
+      </p>
+      <h1 class="lesson__title">Interface, Navigation, ViewCube, Browser und Timeline</h1>
+      <p class="lesson__meta">
+        <span>⏱ 40 Minuten</span>
+        <span>🎯 Einsteiger</span>
+        <span>🖱 Maus-Heavy</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich kann zwischen den <strong>Workspaces</strong> Design, Render, Manufacture und Drawing wechseln und weiß, wozu sie dienen.</li>
+          <li>Ich navigiere flüssig mit Maus und Tastatur in der 3D-Ansicht (Rotate, Pan, Zoom, Fit).</li>
+          <li>Ich nutze den <strong>ViewCube</strong>, um Standardansichten anzuspringen.</li>
+          <li>Ich lese den <strong>Browser-Tree</strong> und schalte Sketches, Bodies und Components sichtbar/unsichtbar.</li>
+          <li>Ich verstehe die <strong>Timeline</strong> und kann jede Operation nachträglich editieren.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Wo befindet sich die Timeline standardmäßig?</summary>
+          <div class="qa__body">Am unteren Rand des Anwendungsfensters, eine schmale Leiste mit Symbolen für jede Operation.</div>
+        </details>
+        <details class="qa">
+          <summary>Welche Maustaste wirst du in Fusion am häufigsten brauchen?</summary>
+          <div class="qa__body">Die <strong>mittlere</strong> Maustaste (das Scroll-Rad lässt sich drücken). Sie ist Pflicht. Touchpad-Nutzer:innen sollten 3-Finger-Gesten oder eine günstige USB-Maus nutzen.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Layout der Oberfläche</h3>
+        <p>Fusion teilt sich in fünf wiederkehrende Bereiche:</p>
+        <ul>
+          <li><strong>Application Bar</strong> ganz oben (Datei, Speichern, Rückgängig, Profilbild).</li>
+          <li><strong>Toolbar</strong> direkt darunter – ihr Inhalt wechselt mit dem aktiven <em>Workspace</em>.</li>
+          <li><strong>Browser</strong> links: hierarchischer Baum aus Sketches, Bodies, Components, Construction Geometry, Origin.</li>
+          <li><strong>ViewCube</strong> oben rechts: würfelförmiger Navigator für Front, Top, Right, Iso etc.</li>
+          <li><strong>Navigation Bar &amp; Timeline</strong> unten: Zoom-Werkzeuge und Operations-Verlauf.</li>
+        </ul>
+
+        <h3>Workspaces – wann brauchst du welchen?</h3>
+        <ul>
+          <li><strong>Design</strong> – dein Hauptarbeitsplatz. Hier konstruieren wir 99 % der Zeit.</li>
+          <li><strong>Render</strong> – realistische Darstellungen für Präsentationen oder Auftragsannahme.</li>
+          <li><strong>Manufacture</strong> – CAM für CNC und Lasercutter (Modul 4).</li>
+          <li><strong>Drawing</strong> – Werkstattzeichnungen mit Bemaßung (Modul 4).</li>
+          <li><em>Generative, Animation, Simulation</em> – im Hobbybereich selten relevant.</li>
+        </ul>
+
+        <h3>Maus-Navigation (Pflicht-Reflexe)</h3>
+        <table class="cheatsheet" style="width:100%">
+          <tbody>
+            <tr><td><strong>Mittlere Maustaste (MMB) halten</strong></td><td>Pan – Ansicht verschieben</td></tr>
+            <tr><td><strong>Shift + MMB halten</strong></td><td>Orbit – Ansicht rotieren</td></tr>
+            <tr><td><strong>Mausrad scrollen</strong></td><td>Zoom unter Cursorposition</td></tr>
+            <tr><td><strong><kbd>F</kbd></strong></td><td>Fit – alles ins Bild zoomen</td></tr>
+          </tbody>
+        </table>
+        <p>Auf macOS-Trackpads funktionieren Multi-Touch-Gesten ähnlich, eine echte Maus mit Mittelrad ist aber empfohlen.</p>
+
+        <h3>Browser-Tree</h3>
+        <p>
+          Der Browser zeigt den hierarchischen Aufbau deines Designs. <strong>Bodies</strong> sind „Klumpen Material",
+          <strong>Components</strong> sind eigenständige Bauteile mit eigener Origin (wichtig für Baugruppen, Modul 5).
+          Mit dem <strong>Auge-Symbol</strong> blendest du Elemente ein/aus – nichts wird gelöscht, nur versteckt.
+        </p>
+
+        <h3>Timeline</h3>
+        <p>
+          Jede Operation (Skizze, Extrude, Fillet, …) erscheint als Symbol in der Timeline. Drei wichtige Aktionen:
+        </p>
+        <ul>
+          <li><strong>Doppelklick</strong> auf ein Symbol → Operation editieren (z.&nbsp;B. Skizzen-Maße ändern).</li>
+          <li><strong>Drag</strong> des Endmarkers nach links → Modell auf einen früheren Stand zurückspulen.</li>
+          <li><strong>Rechtsklick</strong> → Suppress (deaktivieren), Delete, Edit Sketch.</li>
+        </ul>
+
+        <div class="callout callout--note">
+          <strong>Merksatz</strong>
+          Wenn etwas im Design „nicht stimmt", such die Ursache <em>in der Timeline</em>, nicht in der Geometrie.
+          Doppelklick auf das Symbol – nicht radieren und neu zeichnen.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung</h2>
+
+        <ol class="steps">
+          <li>
+            <strong>Beispieldatei öffnen.</strong>
+            <kbd>File</kbd> → <em>New from Sample</em> → <em>Basic Training</em> → wähle z.&nbsp;B. <em>Pencil Holder</em> oder ein anderes einfaches Beispiel.
+            <div class="figure">[Screenshot-Platzhalter: Sample-Browser mit ausgewähltem Pencil Holder]</div>
+          </li>
+
+          <li>
+            <strong>Maus-Reflexe trainieren.</strong> Drücke nacheinander:
+            MMB halten und ziehen (Pan) · <kbd>Shift</kbd>+MMB halten und ziehen (Orbit) · Mausrad rauf/runter (Zoom) · <kbd>F</kbd> (Fit).
+            Wiederhole 5–10 Mal, bis es automatisch sitzt.
+          </li>
+
+          <li>
+            <strong>ViewCube nutzen.</strong> Klicke oben rechts auf <em>FRONT</em>, dann <em>TOP</em>, dann auf eine Würfelecke (Isometrie).
+            Klicke das kleine <strong>Haus-Icon</strong> oberhalb des Cubes – das setzt zurück auf die Standard-Iso.
+          </li>
+
+          <li>
+            <strong>Workspaces durchklicken.</strong> Oben links steht aktuell „Design".
+            Klicke auf den Pfeil daneben und wechsle nacheinander zu <em>Render</em>, <em>Manufacture</em>, <em>Drawing</em> – beobachte, wie sich die Toolbar komplett ändert.
+            Geh am Ende zurück zu <em>Design</em>.
+          </li>
+
+          <li>
+            <strong>Browser erkunden.</strong> Klappe links den Punkt <em>Bodies</em> auf. Klicke das Auge neben einem Body –
+            der Körper verschwindet aus der Ansicht. Klick erneut – er ist wieder da.
+            Klappe <em>Sketches</em> auf, falls vorhanden, und blende die Konstruktionsskizzen ein.
+            <div class="callout">
+              <strong>Wenn der Browser nicht da ist</strong>
+              Menü <kbd>View</kbd> → <em>Show Browser</em>, oder Tastenkürzel <kbd>F2</kbd>.
+            </div>
+          </li>
+
+          <li>
+            <strong>Timeline lesen.</strong> Klicke unten auf den ersten Eintrag (meist eine Skizze). Das Symbol wird hervorgehoben,
+            in der Ansicht siehst du, was diese Operation bewirkt hat. Doppelklicke den Extrude-Eintrag und schaue dir das Bearbeiten-Panel an.
+            <strong>Schließe ohne Änderung</strong> mit <em>Cancel</em>.
+          </li>
+
+          <li>
+            <strong>Timeline-Rollback.</strong> Ziehe den schmalen senkrechten <em>End-Marker</em> der Timeline ein paar Operationen nach links –
+            das Modell „spult zurück". Schiebe ihn ans Ende, der volle Stand ist wieder da. Es geht <strong>nichts verloren</strong>, nur Anzeige.
+          </li>
+
+          <li>
+            <strong>Tastatur-Navigation üben.</strong>
+            <kbd>F</kbd> = Fit, <kbd>S</kbd> = Search Tools (Tippe „extrude" → springt direkt zur Funktion),
+            <kbd>V</kbd> = Visibility toggle der Auswahl, <kbd>Esc</kbd> = aktuelles Werkzeug abbrechen.
+          </li>
+
+          <li>
+            <strong>Datei nicht speichern.</strong> Schließe die Beispieldatei mit <kbd>×</kbd>. Wähle <em>„Don't Save"</em> –
+            Sample-Dateien sollen nicht in deinem Projekt landen.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Du wechselst Workspaces, navigierst sicher in 3D, blendest Browser-Elemente ein/aus und kannst eine Timeline-Operation editieren –
+          alles ohne Maus zu verlieren.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe</h2>
+        <p>
+          Öffne erneut eine Sample-Datei deiner Wahl (gerne eine komplexere wie <em>Engine</em> oder <em>Drone</em>).
+          Erkunde sie 5–10 Minuten in folgenden Schritten:
+        </p>
+        <ul>
+          <li>Schalte alle Bodies bis auf einen unsichtbar – baue dir eine „Solo-Ansicht" eines Bauteils.</li>
+          <li>Klicke dich durch die Timeline und finde die <strong>erste</strong> Skizze. Was wurde dort gezeichnet?</li>
+          <li>Notiere drei Operationstypen, die du bisher noch nicht kanntest (Tipp: <em>Loft</em>, <em>Sweep</em>, <em>Pattern</em>).</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+
+        <details class="qa">
+          <summary>1. Welche Tastenkombination rotiert die 3D-Ansicht?</summary>
+          <div class="qa__body"><kbd>Shift</kbd> + Mittlere Maustaste gedrückt halten und ziehen.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Was passiert beim Doppelklick auf einen Eintrag in der Timeline?</summary>
+          <div class="qa__body">Das zugehörige Bearbeiten-Panel öffnet sich. Du kannst die Operation nachträglich verändern – ohne sie löschen und neu erstellen zu müssen.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Wo schaltest du die Sichtbarkeit eines Sketches um?</summary>
+          <div class="qa__body">Im Browser links: Auge-Symbol neben dem Sketch in der Gruppe <em>Sketches</em> klicken. <kbd>V</kbd> mit ausgewähltem Element geht ebenfalls.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Welcher Workspace wird für Werkstattzeichnungen genutzt?</summary>
+          <div class="qa__body"><em>Drawing</em>. Wir lernen ihn in Modul 4.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Wofür ist das Haus-Icon über dem ViewCube?</summary>
+          <div class="qa__body">Es setzt die Ansicht auf die voreingestellte Heimatansicht zurück (in der Regel isometrisch). Praktisch, wenn du dich verklickt hast.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead>
+              <tr><th>Aktion</th><th>Hotkey</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Fit (alles ins Bild)</td><td><kbd>F</kbd></td></tr>
+              <tr><td>Visibility toggeln</td><td><kbd>V</kbd></td></tr>
+              <tr><td>Werkzeug-Suche („Search")</td><td><kbd>S</kbd></td></tr>
+              <tr><td>Aktuelles Werkzeug abbrechen</td><td><kbd>Esc</kbd></td></tr>
+              <tr><td>Rückgängig / Wiederholen</td><td><kbd>Strg</kbd>/<kbd>⌘</kbd>+<kbd>Z</kbd> · <kbd>Strg</kbd>/<kbd>⌘</kbd>+<kbd>Y</kbd></td></tr>
+              <tr><td>Browser ein-/ausblenden</td><td><kbd>F2</kbd></td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>„Mein Modell ist weg!"</em> → vermutlich nur weggezoomt. <kbd>F</kbd> drücken.</li>
+            <li><em>„Toolbar leer"</em> → versehentlich Workspace gewechselt. Oben links zurück auf <em>Design</em>.</li>
+            <li><em>„Timeline reagiert nicht"</em> → eventuell ist die Datei aus einer fremden Quelle, in der die Timeline deaktiviert ist (Direct-Modeling). <em>Modify → Capture Design History</em> aktiviert sie wieder.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/courses/" rel="noopener">Autodesk Self-Paced Learning – Interface Tour</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=fusion+360+navigation+tutorial+german" rel="noopener">YouTube: deutsche Navigations-Tutorials</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

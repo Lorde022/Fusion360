@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fusion 360 Intensivkurs · 3D-Druck und Holzwerken</title>
+  <meta name="description" content="Selbstlernkurs für Autodesk Fusion 360 mit Fokus auf 3D-Druck und Holzwerken. 26 Lektionen, ca. 20 Stunden, kostenlos und werbefrei." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A7%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="#lehrplan">Lehrplan</a>
+        <a href="#was-du-lernst">Inhalte</a>
+        <a href="#so-funktionierts">So funktioniert's</a>
+      </nav>
+      <div class="site-header__tools">
+        <label class="search">
+          <span class="visually-hidden">Lektionen durchsuchen</span>
+          <input id="search" type="search" placeholder="Suchen…" autocomplete="off" />
+        </label>
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- =============================== HERO =============================== -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <span class="eyebrow">Selbstlernkurs · Deutsch · kostenlos</span>
+          <h1>Fusion&nbsp;360 für <span class="hl">3D-Druck</span> und <span class="hl">Holzwerken</span>.</h1>
+          <p class="hero__lead">
+            Vom ersten Klick bis zum eigenen Hybrid-Projekt. 26 Lektionen, ca.&nbsp;20&nbsp;Stunden,
+            mit echten Werkstattprojekten – Wandhalterung mit Snap-Fit, Wandregal aus Multiplex,
+            Tischlampe aus Holz und gedruckter Fassung.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary btn--lg" href="module/1-grundlagen/1-was-ist-cad.html" data-start>Kurs starten</a>
+            <a class="btn btn--ghost btn--lg" href="#lehrplan">Lehrplan ansehen</a>
+          </div>
+          <ul class="hero__stats" aria-label="Kursdaten">
+            <li><strong>26</strong><span>Lektionen</span></li>
+            <li><strong>~20&nbsp;h</strong><span>Lernzeit</span></li>
+            <li><strong>6</strong><span>Module</span></li>
+            <li><strong>3</strong><span>Werkstattprojekte</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <!-- Isometrische Illustration: Skizze → Körper → gedrucktes Teil + Holzbrett -->
+          <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" role="img">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity=".25"/>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+              </linearGradient>
+              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-opacity=".1" stroke-width="1"/>
+              </pattern>
+            </defs>
+
+            <!-- Hintergrund-Raster -->
+            <rect width="480" height="420" fill="url(#grid)" color="var(--fg-muted)"/>
+            <circle cx="370" cy="120" r="180" fill="url(#g1)"/>
+
+            <!-- Skizze (links) -->
+            <g transform="translate(40,260)" stroke="currentColor" fill="none" stroke-width="2">
+              <rect x="0" y="0" width="120" height="80" stroke-dasharray="4 4" opacity=".7"/>
+              <circle cx="60" cy="40" r="14" stroke-dasharray="3 3" opacity=".7"/>
+              <text x="60" y="105" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".7">2D-Skizze</text>
+            </g>
+
+            <!-- Pfeil 1 -->
+            <path d="M 175 290 L 215 250" stroke="var(--accent)" stroke-width="2.5" fill="none" marker-end="url(#arr)"/>
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/>
+              </marker>
+            </defs>
+
+            <!-- Isometrischer Körper (Mitte) -->
+            <g transform="translate(220,160)">
+              <!-- Top -->
+              <polygon points="60,0 120,30 60,60 0,30" fill="var(--accent)" opacity=".95"/>
+              <!-- Left -->
+              <polygon points="0,30 60,60 60,130 0,100" fill="var(--accent)" opacity=".7"/>
+              <!-- Right -->
+              <polygon points="120,30 60,60 60,130 120,100" fill="var(--accent)" opacity=".55"/>
+              <!-- Edges -->
+              <g stroke="var(--bg)" stroke-width="1.5" fill="none">
+                <polygon points="60,0 120,30 60,60 0,30"/>
+                <polygon points="0,30 60,60 60,130 0,100"/>
+                <polygon points="120,30 60,60 60,130 120,100"/>
+              </g>
+              <text x="60" y="160" text-anchor="middle" font-size="11" fill="currentColor" opacity=".75">3D-Körper</text>
+            </g>
+
+            <!-- Pfeil 2 -->
+            <path d="M 365 230 L 395 270" stroke="var(--accent)" stroke-width="2.5" fill="none" marker-end="url(#arr)"/>
+
+            <!-- 3D-gedrucktes Teil + Holzbrett (rechts) -->
+            <g transform="translate(360,280)">
+              <!-- Holzbrett -->
+              <rect x="0" y="20" width="100" height="22" rx="2" fill="#b88457" opacity=".9"/>
+              <rect x="0" y="20" width="100" height="22" rx="2" fill="none" stroke="currentColor" stroke-opacity=".4"/>
+              <line x1="22" y1="20" x2="22" y2="42" stroke="currentColor" stroke-opacity=".25"/>
+              <line x1="58" y1="20" x2="58" y2="42" stroke="currentColor" stroke-opacity=".25"/>
+              <!-- Druckteil -->
+              <g transform="translate(28,-18)">
+                <rect x="0" y="0" width="50" height="38" rx="4" fill="var(--accent)" opacity=".85"/>
+                <circle cx="25" cy="19" r="8" fill="var(--bg)"/>
+              </g>
+              <text x="50" y="65" text-anchor="middle" font-size="11" fill="currentColor" opacity=".75">Hybrid-Bauteil</text>
+            </g>
+
+            <!-- Beschriftung Skizze->Körper->Teil oben -->
+            <g transform="translate(40,40)" font-size="12" fill="currentColor" opacity=".85">
+              <text x="0" y="0" font-weight="700" font-size="14">Konstruktions-Workflow</text>
+              <text x="0" y="22">Skizze ▸ Operation ▸ Werkstattfähiges Teil</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PROGRESS ============================ -->
+    <section class="progress-strip" aria-label="Dein Fortschritt">
+      <div class="container progress-strip__inner">
+        <div class="progress-strip__text">
+          <span class="progress-strip__label">Dein Fortschritt</span>
+          <span class="progress-strip__value" data-overall-text>0&nbsp;/&nbsp;26 Lektionen</span>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Gesamtfortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-overall-bar>
+          <div class="progress__fill" style="width:0%"></div>
+        </div>
+        <div class="progress-strip__actions">
+          <a class="btn btn--primary" href="#" data-resume hidden>Weiter wo du aufgehört hast</a>
+          <button class="btn btn--ghost" type="button" data-reset>Fortschritt zurücksetzen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ FEATURES ============================ -->
+    <section class="features container" id="was-du-lernst">
+      <h2 class="section__title">Was du am Ende kannst</h2>
+      <p class="section__lead">
+        Vier konkrete Fähigkeiten, die du sofort in der eigenen Werkstatt einsetzen kannst.
+      </p>
+      <div class="features__grid">
+        <article class="feature">
+          <div class="feature__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <h3>Parametrisch konstruieren</h3>
+          <p>Mit User-Parametern und Sketch-Constraints baust du Modelle, die sich später per Zahlenänderung anpassen lassen.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7l8-4 8 4-8 4-8-4z"/><path d="M4 7v10l8 4 8-4V7"/><path d="M12 11v10"/></svg>
+          </div>
+          <h3>FDM-gerecht designen</h3>
+          <p>Wandstärken, Toleranzen, Snap-Fits, Schraubsitze – druckbar konstruieren statt hinterher reparieren.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M3 10h18M9 6v12"/></svg>
+          </div>
+          <h3>Möbel werkstattfähig planen</h3>
+          <p>Holzverbindungen, Plattenwerkstoffe, Werkstattzeichnungen mit Schnitten, Maßen und Stückliste.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          </div>
+          <h3>Sauber exportieren</h3>
+          <p>STL und 3MF für den Drucker, DXF für Lasercutter und CNC, PDF-Werkstattzeichnung für die Säge.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================ MODULE ============================== -->
+    <section class="container" id="lehrplan">
+      <h2 class="section__title">Lehrplan</h2>
+      <p class="section__lead">
+        Sechs Module, aufeinander aufbauend. Jede Lektion: Lernziele, kurze Theorie,
+        geführte Übung, freie Aufgabe, Quiz, Cheat&nbsp;Sheet.
+      </p>
+      <div class="modules" id="modules" aria-label="Module"></div>
+    </section>
+
+    <!-- ============================ HOW IT WORKS ======================== -->
+    <section class="howto" id="so-funktionierts">
+      <div class="container">
+        <h2 class="section__title">So funktioniert der Kurs</h2>
+        <ol class="howto__steps">
+          <li>
+            <span class="howto__num">1</span>
+            <h3>Lektion lesen, Übung mitmachen</h3>
+            <p>Theorie kompakt, dann Klick-für-Klick-Übung in Fusion. Plane je Lektion 30–60 Minuten.</p>
+          </li>
+          <li>
+            <span class="howto__num">2</span>
+            <h3>Selbst überprüfen</h3>
+            <p>Freie Transferaufgabe und kurzes Quiz am Ende jeder Lektion zeigen dir, ob es sitzt.</p>
+          </li>
+          <li>
+            <span class="howto__num">3</span>
+            <h3>Fortschritt markieren</h3>
+            <p>Häkchen setzen, Fortschritt wird lokal im Browser gespeichert. Kein Login nötig, keine Daten gehen weg.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>Fusion 360 Kurs · Open Source · Hosting via Netlify</p>
+      <p class="site-footer__meta">Fusion 360 ist eine Marke von Autodesk Inc. Dieser Kurs ist nicht offiziell mit Autodesk verbunden.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/curriculum.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

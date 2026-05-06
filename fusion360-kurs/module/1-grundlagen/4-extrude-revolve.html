@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vom 2D zum 3D – Extrude, Revolve, Press-Pull · Modul 1, Lektion 4 · Fusion 360 Kurs</title>
+  <meta name="description" content="Aus Skizzen werden Körper. Extrude, Revolve und Press-Pull mit den Operationsmodi New Body, Join, Cut, Intersect." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="extrude-revolve"
+             data-module="1-grundlagen"
+             data-lesson-index="4">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 1</span> ›
+        Lektion 4
+      </p>
+      <h1 class="lesson__title">Vom 2D zum 3D: Extrude, Revolve, Press-Pull</h1>
+      <p class="lesson__meta">
+        <span>⏱ 45 Minuten</span>
+        <span>🎯 Einsteiger</span>
+        <span>📦 Erste echte 3D-Körper</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich kann eine geschlossene Skizze mit <strong>Extrude</strong> in einen 3D-Körper überführen.</li>
+          <li>Ich nutze <strong>Revolve</strong>, um rotationssymmetrische Teile (Vase, Schraube, Knauf) zu erzeugen.</li>
+          <li>Ich verwende die Modi <strong>New&nbsp;Body, Join, Cut, Intersect, New&nbsp;Component</strong> bewusst.</li>
+          <li>Ich kann mit <strong>Press-Pull</strong> bestehende Geometrie schnell verändern.</li>
+          <li>Ich erstelle Bohrungen mit <em>Cut-Extrude</em> oder dem speziellen <em>Hole</em>-Werkzeug.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Welche Operation eignet sich für eine Schraube oder eine Vase?</summary>
+          <div class="qa__body"><em>Revolve</em> – beide Teile sind rotationssymmetrisch um eine Achse.</div>
+        </details>
+        <details class="qa">
+          <summary>Was muss eine Skizze haben, damit Extrude einen Körper erzeugt?</summary>
+          <div class="qa__body">Sie muss ein <strong>geschlossenes Profil</strong> haben (eine Fläche, die Fusion automatisch erkennt und beim Hovern hellblau einfärbt).</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Extrude (<kbd>E</kbd>)</h3>
+        <p>
+          Zieht ein 2D-Profil in die dritte Dimension. Die wichtigsten Optionen im Dialog:
+        </p>
+        <ul>
+          <li><strong>Direction:</strong> One Side, Two Sides oder Symmetric (wenn die Skizze eine Mittelebene markieren soll).</li>
+          <li><strong>Extent:</strong> Distance (mm), To Object (bis zu einer Fläche), All (durch alles).</li>
+          <li><strong>Operation:</strong> New Body / Join / Cut / Intersect / New Component – darüber gleich mehr.</li>
+          <li><strong>Taper Angle:</strong> Schräge beim Extrudieren, hilfreich z.&nbsp;B. für Entformungsschrägen.</li>
+        </ul>
+
+        <h3>Operationsmodi – das ist Gold wert</h3>
+        <table class="cheatsheet" style="width:100%">
+          <tbody>
+            <tr><td><strong>New Body</strong></td><td>Erzeugt einen separaten Körper. Empfohlen, wenn das Teil nicht zu einem bestehenden gehört.</td></tr>
+            <tr><td><strong>Join</strong></td><td>Addiert das neue Volumen zum bestehenden Körper.</td></tr>
+            <tr><td><strong>Cut</strong></td><td>Subtrahiert. Klassiker für Bohrungen und Aussparungen.</td></tr>
+            <tr><td><strong>Intersect</strong></td><td>Behält nur den Schnittbereich – z.&nbsp;B. für komplexe Übergänge.</td></tr>
+            <tr><td><strong>New Component</strong></td><td>Wie New Body, aber als eigenständige Komponente. Wichtig für Baugruppen (Modul 5).</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout--note">
+          <strong>Faustregel</strong>
+          Wenn du noch unschlüssig bist: <em>New Component</em> wählen. Aus Komponenten lassen sich später Bodies extrahieren, umgekehrt ist das deutlich aufwendiger.
+        </div>
+
+        <h3>Revolve (<kbd>R</kbd> ist im Sketch belegt → über Toolbar)</h3>
+        <p>
+          Rotiert ein Profil um eine Achse. Achse kann eine Origin-Achse, eine Sketch-Linie oder eine Construction Line sein.
+          Voller Umlauf 360°, oder beliebiger Winkel. Wichtig: das Profil darf die Achse <strong>nicht überschneiden</strong>,
+          sonst entstehen ungültige Geometrien.
+        </p>
+
+        <h3>Press-Pull (<kbd>Q</kbd>)</h3>
+        <p>
+          Magisches Multifunktionstool. Was es macht, hängt davon ab, was du auswählst:
+        </p>
+        <ul>
+          <li>Eine <em>Skizzenfläche</em> ausgewählt → wirkt wie Extrude.</li>
+          <li>Eine <em>Bauteilfläche</em> ausgewählt → verschiebt die Fläche, der Körper wird länger/kürzer.</li>
+          <li>Eine <em>Kante</em> ausgewählt → Fillet/Chamfer-Vorschau.</li>
+        </ul>
+        <p>Schnell und intuitiv für Korrekturen, kann aber die Timeline aufblähen, wenn man es übertreibt.</p>
+
+        <h3>Hole-Werkzeug</h3>
+        <p>
+          Für genormte Bohrungen (Durchgangsloch, Senkkopf, Sackloch, Gewindebohrung) gibt es ein eigenes <em>Hole</em>-Tool.
+          Es ist „intelligent": Position kann an Skizzenpunkten oder Flächenmittelpunkten andocken, Metrische Schraubgrößen sind hinterlegt.
+          Wir nutzen es ab Modul 3 intensiv.
+        </p>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – L-Halterung 3D</h2>
+        <p>Aus dem L-Profil aus Lektion 3 wird jetzt ein echtes Bauteil.</p>
+
+        <ol class="steps">
+          <li>
+            <strong>Datei öffnen.</strong> Im Data Panel <code>Lektion-3-LProfil</code> öffnen. Speichere sofort als
+            <code>Lektion-4-LHalterung</code> (Datei → Save As, oder <em>Save Version</em> dann umbenennen).
+          </li>
+          <li>
+            <strong>Skizze sichtbar machen.</strong> Im Browser unter <em>Sketches</em> die Skizze sichtbar schalten.
+            Hover mit der Maus über die L-Form: die geschlossene Fläche wird hellblau.
+          </li>
+          <li>
+            <strong>Extrudieren.</strong> <kbd>E</kbd> drücken. Klicke auf die L-Fläche (nicht den Kreis – der Kreis kommt gleich).
+            Im Dialog: <em>Direction</em> = One Side, <em>Distance</em> = <code>5 mm</code>, <em>Operation</em> = New Body. <em>OK</em>.
+          </li>
+          <li>
+            <strong>Bohrung als Cut.</strong> Skizze ist immer noch da. <kbd>E</kbd> erneut. Wähle den Kreis.
+            <em>Distance</em> = <code>-5 mm</code> (negativ = nach unten durch das Bauteil), <em>Operation</em> = <strong>Cut</strong>. <em>OK</em>.
+          </li>
+          <li>
+            <strong>Skizze ausblenden.</strong> Browser → <em>Sketches</em> → Auge aus. Du siehst jetzt nur den Körper mit der Bohrung.
+          </li>
+          <li>
+            <strong>Rückseite verstärken.</strong> Klicke die Rückfläche an, <em>Create Sketch</em> (Fusion legt automatisch eine neue Skizze auf dieser Fläche an).
+            Zeichne ein Rechteck, das die Rückseite vollständig überdeckt (Konturen einrasten lassen).
+            Skizze schließen, <kbd>E</kbd>, Distance = <code>10 mm</code>, <em>Operation</em> = <strong>Join</strong>. So entsteht eine Verstärkungsplatte am Rücken.
+          </li>
+          <li>
+            <strong>Press-Pull testen.</strong> <kbd>Q</kbd>, klicke die Vorderfläche der Halterung an, ziehe leicht nach vorn.
+            Distanz <code>2 mm</code> eingeben, <em>OK</em>. Die ganze Vorderfläche verschiebt sich – der Körper ist 2 mm dicker geworden.
+          </li>
+          <li>
+            <strong>Speichern.</strong> <kbd>Strg</kbd>/<kbd>⌘</kbd>+<kbd>S</kbd>. Versionskommentar: <em>„Erste 3D-Halterung"</em>.
+          </li>
+        </ol>
+
+        <h3>Bonus-Übung: Revolve einer Vase</h3>
+        <ol class="steps">
+          <li>
+            <strong>Neues Design.</strong> <code>Lektion-4-Vase</code>.
+          </li>
+          <li>
+            <strong>Skizze auf YZ-Ebene.</strong> Damit die Vase senkrecht „steht".
+          </li>
+          <li>
+            <strong>Mittellinie als Construction Line.</strong> Linie senkrecht entlang der Z-Achse zeichnen, mit <kbd>X</kbd> in eine Construction Line wandeln. Sie wird gestrichelt.
+          </li>
+          <li>
+            <strong>Profil zeichnen.</strong> Mit <kbd>L</kbd> ein geschlossenes Profil rechts der Construction Line –
+            geschwungener Hals, breiter Bauch, schmaler Boden. Konkrete Maße sind frei wählbar (z.&nbsp;B. 80 hoch, 35 max breit).
+          </li>
+          <li>
+            <strong>Profil schließen.</strong> Wieder zur Construction Line zurück, alle Endpunkte mit <em>Coincident</em> verbinden. Skizze beenden.
+          </li>
+          <li>
+            <strong>Revolve.</strong> Toolbar <em>Create</em> → <em>Revolve</em>. Profil wählen, dann die Construction Line als <em>Axis</em>. Angle = 360°. <em>OK</em>.
+          </li>
+          <li>
+            <strong>Hohl machen (Vorgriff auf Shell).</strong> Toolbar <em>Modify</em> → <em>Shell</em>. Obere Fläche auswählen, Wandstärke <code>2 mm</code>. <em>OK</em>.
+          </li>
+          <li>
+            <strong>Speichern.</strong>
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Eine 3D-L-Halterung mit Bohrung und Rückenverstärkung sowie eine erste Revolve-Vase mit Wand. Beide gespeichert.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Schraubenkopf</h2>
+        <p>
+          Konstruiere einen einfachen Sechskant-Schraubenkopf <strong>ohne Gewinde</strong>:
+        </p>
+        <ul>
+          <li>Sechskant mit Schlüsselweite (SW) 10 mm, Höhe 4 mm – via <em>Polygon (inscribed)</em> in einer Skizze, dann Extrude.</li>
+          <li>Schaft ⌀ 6 mm, Länge 25 mm – über zweite Skizze auf der Unterseite, Extrude Join.</li>
+          <li>Zentrale Bohrung im Kopf ⌀ 3 mm, 2 mm tief – Cut.</li>
+        </ul>
+        <p><strong>Akzeptanzkriterien:</strong> Bauteil heißt <code>Lektion-4-Schraubenkopf</code>, Maße per User-Parameter ausgelagert (vorgreifend; reicht es, wenn du sie als normale Maße einträgst – Parameter folgen in Modul 2).</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Welche Operation eignet sich für eine Schraube?</summary>
+          <div class="qa__body">Revolve. Schaft und Kopf sind rotationssymmetrisch.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Was bedeutet <em>Cut</em> bei Extrude?</summary>
+          <div class="qa__body">Das neue Volumen wird vom bestehenden Körper subtrahiert. So entstehen Bohrungen oder Taschen.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Wofür sind Construction Lines gut?</summary>
+          <div class="qa__body">Sie helfen beim Konstruieren (z.&nbsp;B. als Drehachse oder Symmetrie-Linie), zählen aber nicht zum Profil und werden ignoriert, wenn Fusion eine geschlossene Fläche sucht.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Was passiert, wenn du Press-Pull auf einer Bauteilfläche anwendest?</summary>
+          <div class="qa__body">Die Fläche wandert in ihre Normalrichtung – der Körper wird länger oder kürzer in dieser Richtung.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Was bedeutet <em>Symmetric</em> bei Extrude-Direction?</summary>
+          <div class="qa__body">Die Extrusion geht zu beiden Seiten der Skizzenebene gleich weit. Praktisch, wenn die Skizzenebene die Mittelebene des Bauteils sein soll.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Hotkey</th></tr></thead>
+            <tbody>
+              <tr><td>Extrude</td><td><kbd>E</kbd></td></tr>
+              <tr><td>Press-Pull</td><td><kbd>Q</kbd></td></tr>
+              <tr><td>Fillet (Verrundung)</td><td><kbd>F</kbd></td></tr>
+              <tr><td>Werkzeug-Suche</td><td><kbd>S</kbd> → „revolve"/„hole"</td></tr>
+              <tr><td>Skizzenoperation rückgängig</td><td><kbd>Strg</kbd>/<kbd>⌘</kbd>+<kbd>Z</kbd></td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>„Extrude erkennt kein Profil"</em> → die Skizze ist nicht geschlossen. Mit Trim oder zusätzlichen Linien schließen.</li>
+            <li><em>„Cut macht ungewollt einen Body weg"</em> → falsches Target ausgewählt. Im Extrude-Dialog unter <em>Objects to Cut</em> manuell festlegen.</li>
+            <li><em>„Revolve gibt Fehler"</em> → Profil schneidet die Achse oder Achse stimmt nicht. Construction Line muss <em>außerhalb</em> oder genau auf einer Profilkante liegen.</li>
+            <li><em>„Press-Pull will nicht"</em> → bei sehr komplexer Geometrie zickig. Dann lieber explizit Extrude oder Move/Copy nutzen.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-3F1ECE40-3CB7-4FC7-A0D2-3D8AAD0FD3DD" rel="noopener">Autodesk Help: Extrude</a></li>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-29A07F8A-E61A-4FF3-933C-5DBE51FFA0E2" rel="noopener">Autodesk Help: Revolve</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Snap-Fit-Verbindungen · Modul 3, Lektion 4 · Fusion 360 Kurs</title>
+  <meta name="description" content="Cantilever Snap-Fits in FDM-Druckteilen sicher konstruieren – Geometrie, Auslegung, Stolpersteine." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="snap-fits"
+             data-module="3-3d-druck"
+             data-lesson-index="4">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 3</span> ›
+        Lektion 4
+      </p>
+      <h1 class="lesson__title">Snap-Fit-Verbindungen: Geometrie und Auslegung</h1>
+      <p class="lesson__meta">
+        <span>⏱ 50 Minuten</span>
+        <span>🎯 3D-Druck-Fokus</span>
+        <span>🪝 Schraubenlos verbinden</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich verstehe das Funktionsprinzip eines <strong>Cantilever Snap-Fits</strong>.</li>
+          <li>Ich kann Hook-Höhe, Auslenkung und Federarmlänge sinnvoll dimensionieren.</li>
+          <li>Ich konstruiere einen Snap-Fit, der <strong>haltbar</strong> ist – also nicht bei der ersten Belastung bricht.</li>
+          <li>Ich plane den Snap-Fit so, dass er <strong>druckorientierungsgerecht</strong> ist (Schichten parallel zur Belastung).</li>
+          <li>Ich kenne Alternativen: <em>Annular</em> Snap-Fit, <em>Torsion</em> Snap-Fit, <em>Ball</em> Snap-Fit.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Was ist die Schwachstelle eines Snap-Fits aus FDM?</summary>
+          <div class="qa__body">Die Klebenaht zwischen den Druckschichten an der Federwurzel. Wenn die Schichten quer zur Belastung verlaufen, bricht der Federarm dort. Daher: Federarm immer so orientieren, dass die Schichten <em>entlang</em> der Federbiegung verlaufen.</div>
+        </details>
+        <details class="qa">
+          <summary>Was ist Materialermüdung?</summary>
+          <div class="qa__body">Wiederholte Belastungen verursachen Mikrorisse, die mit der Zeit wachsen. Plastik leidet stark daran. Snap-Fits sollten möglichst selten ge- und entriegelt werden, oder so ausgelegt sein, dass die Belastung weit unter der Bruchlast liegt.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Cantilever Snap-Fit – die häufigste Form</h3>
+        <p>
+          Ein dünner Federarm, der an einer Seite fest mit dem Bauteil verbunden ist. Am freien Ende sitzt ein <strong>Hook</strong>
+          (Hinterschnitt). Beim Zusammenfügen wird der Arm elastisch ausgelenkt, der Hook gleitet über die Gegenkante,
+          beim Erreichen der Endposition springt der Arm zurück und der Hook hintergreift.
+        </p>
+
+        <h3>Die fünf wichtigen Maße</h3>
+        <table class="cheatsheet" style="width:100%">
+          <tbody>
+            <tr><td><strong>L</strong></td><td>Federarm-Länge (Wurzel bis Hook). Faustregel: mindestens 5× Hook-Höhe.</td></tr>
+            <tr><td><strong>t</strong></td><td>Federarm-Dicke. Typisch 1,5–2,5 mm bei PLA.</td></tr>
+            <tr><td><strong>b</strong></td><td>Federarm-Breite (quer zur Auslenkung). 4–10 mm üblich.</td></tr>
+            <tr><td><strong>h</strong></td><td>Hook-Höhe (Hinterschnitt). 0,8–2,0 mm typisch.</td></tr>
+            <tr><td><strong>α</strong></td><td>Einführwinkel des Hooks. 30°–45° gut. Steiler = schwerer einzuführen, flacher = leichter zu lösen.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Auslenkung und Spannung – ohne Formel</h3>
+        <p>
+          Beim Einklipsen wird der Arm um <strong>h</strong> ausgelenkt. Die maximale Spannung entsteht an der Federwurzel.
+          Faustregeln:
+        </p>
+        <ul>
+          <li><strong>L ≥ 5 · h</strong>: lange Arme verteilen die Biegung, halten länger.</li>
+          <li><strong>t ≤ L / 8</strong>: dünne Arme biegen leichter.</li>
+          <li><strong>Wurzelradius</strong>: an der Wurzel des Federarms ein <em>Fillet</em> R = 0,5–1 mm. Sonst entsteht eine Kerbwirkung und der Arm bricht dort als erstes.</li>
+        </ul>
+
+        <h3>Wiederlösbar oder einmalig?</h3>
+        <ul>
+          <li><strong>Nicht-lösbar</strong>: Hook-Rückseite senkrecht (90°). Geht rein, geht (kaum) raus.</li>
+          <li><strong>Lösbar</strong>: Hook-Rückseite mit ca. 30°–45° abgeschrägt. Lässt sich mit Kraft lösen.</li>
+          <li><strong>Easy-Release</strong>: Federarm hat einen Aktuator (kleinen Hebel), den man drückt. Drei Maße mehr, aber komfortabel.</li>
+        </ul>
+
+        <h3>Druckorientierung</h3>
+        <p>
+          Druckt man den Federarm <strong>liegend</strong> (Schichten verlaufen entlang der Federbiegung), hält er gut.
+          Druckt man ihn <strong>stehend</strong> (Schichten quer), bricht er an der Wurzel beim ersten Klipp.
+          Konsequenz: das Bauteil schon im CAD so orientieren, dass beim Druck der Federarm flach liegt.
+        </p>
+
+        <div class="callout callout--note">
+          <strong>Toleranz nicht vergessen</strong>
+          Zwischen Hook und Hinterschnitt mindestens 0,1 mm Spiel pro Kontaktfläche einplanen. Sonst verklemmt es beim Druck und der Hook bricht beim ersten Versuch.
+        </div>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung – Boxdeckel mit Snap-Fit</h2>
+        <p>Wir konstruieren einen einfachen rechteckigen Behälter mit Snap-Fit-Deckel.</p>
+
+        <ol class="steps">
+          <li>
+            <strong>Neues Design.</strong> <code>Lektion-3-4-SnapBox</code>.
+          </li>
+
+          <li>
+            <strong>Parameter.</strong>
+            <pre><code>// — Box —
+box_b      = 60 mm
+box_t      = 40 mm
+box_h      = 25 mm
+wand       = 1.6 mm
+
+// — Snap-Fit —
+arm_L      = 12 mm
+arm_t      = 1.6 mm
+arm_b      = 8 mm
+hook_h     = 1.0 mm
+hook_einf  = 30 deg   // Einführwinkel
+hook_loese = 45 deg   // Löse-Winkel (lösbar)
+snap_clear = 0.10 mm  // Spiel im Hinterschnitt</code></pre>
+          </li>
+
+          <li>
+            <strong>Box-Grundkörper.</strong> Skizze auf XY: Rechteck zentrisch, <code>box_b × box_t</code>. Extrudieren <code>box_h</code>. Shell oben offen mit <code>wand</code>. (Aus Modul 1 bekannt.)
+          </li>
+
+          <li>
+            <strong>Deckelplatte.</strong> Skizze auf XY (eine Konstruktionsebene <em>Offset</em> 30 mm über dem Box-Boden, oder einfach lose neben der Box). Rechteck <code>box_b × box_t</code>, extrudieren <code>wand</code>. New Body (Deckel).
+          </li>
+
+          <li>
+            <strong>Deckel-Federarm-Skizze.</strong> Auf der Unterseite des Deckels eine Skizze.
+            Zeichne ein schmales Rechteck mit Breite <code>arm_b</code>, Länge <code>arm_L</code>, mittig an einer langen Seite des Deckels.
+            Skizze schließen, extrudieren <code>arm_t</code> nach unten (vom Deckel weg). Operation: Join (am Deckel-Body).
+          </li>
+
+          <li>
+            <strong>Hook am Federarm.</strong> Auf einer Stirnfläche des Federarms (die nach außen schaut) eine Skizze.
+            Zeichne das Hook-Profil: ein kleiner Hinterschnitt mit:
+            <ul>
+              <li>Hook-Höhe = <code>hook_h</code> (in Y-Richtung nach außen).</li>
+              <li>Einführschräge = <code>hook_einf</code> (oben).</li>
+              <li>Löseschräge = <code>hook_loese</code> (unten, wenn lösbar).</li>
+            </ul>
+            Skizze schließen, extrudieren <code>arm_b</code> in Federarm-Breite. Operation: Join.
+            <div class="figure">
+              [Skizze des Hook-Querschnitts: Profil sieht aus wie eine Pfeilspitze, oben spitz (Einführschräge), unten flacher Hinterschnitt mit Löseschräge.]
+            </div>
+          </li>
+
+          <li>
+            <strong>Wurzelradius.</strong> <kbd>F</kbd>, Federarm-Wurzel verrunden mit Radius 0,8 mm. Wichtig: das Fillet auf <em>beide</em> Innenkanten setzen, wo Federarm in Deckel übergeht.
+          </li>
+
+          <li>
+            <strong>Gegenstück an der Box-Wand.</strong> An der Außenwand der Box, an der Stelle, wo der Hook hingreift, ein Hinterschnitt:
+            <ul>
+              <li>Skizze auf der Außenfläche der Box-Wand.</li>
+              <li>Rechteck etwas breiter als <code>arm_b + 2 mm</code>, in der Höhe etwas höher als <code>hook_h + 2 * snap_clear</code>.</li>
+              <li>Extrude Cut, Tiefe <code>hook_h + snap_clear</code>.</li>
+            </ul>
+            Wenn der Deckel später aufgesetzt wird, rastet der Hook in diese Aussparung.
+          </li>
+
+          <li>
+            <strong>Spiegeln auf die andere Seite.</strong> Der Deckel braucht zwei Federarme (links/rechts), sonst kippt er.
+            Mirror, Type Features, Object = die Federarm-Operationen, Plane = Origin XZ. <em>OK</em>.
+            Auf der Box ebenfalls die Hinterschnitt-Aussparung spiegeln.
+          </li>
+
+          <li>
+            <strong>Druckorientierungs-Check.</strong> Drehe die Ansicht: wenn der Deckel auf dem Druckbett liegt
+            (Oberseite nach unten oder oben?), verlaufen die Schichten parallel zur Federarmbiegung.
+            Wenn ja: top. Wenn nein: Designorientierung im Slicer drehen.
+          </li>
+
+          <li>
+            <strong>Stresstest.</strong> Ändere <code>box_b</code> auf 80 – Box wird breiter, Deckel und Snap-Fit-Position passen sich an? Wenn die Mirror-Plane stimmt, sollte das automatisch klappen.
+          </li>
+
+          <li>
+            <strong>Speichern und exportieren.</strong> Beide Bodies einzeln als STL.
+          </li>
+
+          <li>
+            <strong>Drucken und testen.</strong> Erst den Deckel allein drucken, vorsichtig den Federarm biegen, prüfen ob er federt ohne zu brechen. Dann Box drucken, Deckel aufsetzen, schließen lassen, einmal lösen.
+            Wenn der Hook bricht: Wurzelradius oder Federarmlänge prüfen.
+            Wenn der Deckel nicht hält: Hook-Höhe oder Spielmaß prüfen.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Eine Box mit Deckel, der mit zwei Snap-Fits hält. Verriegelt sich satisfying mit „klick" und lässt sich mit Daumen lösen.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Steckverbinder</h2>
+        <p>
+          Konstruiere zwei rechteckige Profile, die sich per Snap-Fit zusammenstecken lassen:
+        </p>
+        <ul>
+          <li>Profil A hat zwei Federarme (oben/unten).</li>
+          <li>Profil B hat zwei Hinterschnitte (Aussparungen).</li>
+          <li>Die Verbindung muss mind. 5x lösbar sein, ohne dass etwas bricht.</li>
+        </ul>
+        <p><strong>Akzeptanzkriterium:</strong> Datei <code>Lektion-3-4-Steckverbinder</code>, beide Teile getrennt exportierbar, Federarmlänge ≥ 5× Hook-Höhe, Wurzelradius ≥ 0,5 mm.</p>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Wie lang sollte ein Federarm im Verhältnis zur Hook-Höhe sein?</summary>
+          <div class="qa__body">Mindestens 5× Hook-Höhe. Kürzere Arme biegen zu stark an der Wurzel und brechen.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Warum ist der Wurzelradius wichtig?</summary>
+          <div class="qa__body">An scharfen Innenkanten konzentrieren sich Spannungen (Kerbwirkung). Ein Fillet R 0,5–1 mm verteilt die Spannung und verhindert Risse an der Federwurzel.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Wie unterscheidet sich ein lösbarer von einem nicht-lösbaren Snap-Fit?</summary>
+          <div class="qa__body">Über die Rückseite des Hooks. Senkrecht (90°) = nicht-lösbar. Schräg (30°–45°) = lösbar mit Kraft.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Welche Druckorientierung empfiehlt sich für Snap-Fit-Bauteile?</summary>
+          <div class="qa__body">So, dass der Federarm flach liegt – Schichten verlaufen dann entlang der Biegung, nicht quer dazu. Sonst delaminiert der Arm an der Wurzel.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Was bewirkt ein Spielmaß zwischen Hook und Hinterschnitt?</summary>
+          <div class="qa__body">Es verhindert, dass das Druckmaß wegen Toleranzen zu eng wird. Ohne Spiel verklemmt es beim Schließen, der Hook biegt sich beim Versuch zu schließen, bricht ggf. ab. 0,1 mm pro Kontaktfläche ist ein guter Startwert.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Maß</th><th>Empfohlener Wert (PLA)</th></tr></thead>
+            <tbody>
+              <tr><td>Federarm-Länge L</td><td>≥ 5 × Hook-Höhe</td></tr>
+              <tr><td>Federarm-Dicke t</td><td>1,5–2,5 mm</td></tr>
+              <tr><td>Federarm-Breite b</td><td>4–10 mm</td></tr>
+              <tr><td>Hook-Höhe h</td><td>0,8–2,0 mm</td></tr>
+              <tr><td>Einführwinkel α</td><td>30°–45°</td></tr>
+              <tr><td>Wurzelradius</td><td>0,5–1,0 mm</td></tr>
+              <tr><td>Spielmaß Kontakt</td><td>≥ 0,1 mm</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Häufige Stolperer</strong></p>
+          <ul>
+            <li><em>Federarm bricht an der Wurzel</em> → Wurzelradius vergrößern, Druckorientierung prüfen, Federarm verlängern.</li>
+            <li><em>Snap-Fit hält nicht</em> → Hook-Höhe vergrößern (von 0,8 auf 1,5 mm), Hinterschnitt tiefer.</li>
+            <li><em>Snap-Fit lässt sich nicht zusammenstecken</em> → Einführwinkel verflachen (von 45° auf 30°), Spielmaß im Hinterschnitt prüfen.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://omnexus.specialchem.com/tech-library/article/snap-fit-design-guide" rel="noopener">Omnexus: Snap-Fit Design Guide (Materialwissen)</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=snap+fit+3d+printing+design" rel="noopener">YouTube: Snap-Fits in der Praxis</a></li>
+        </ul>
+      </section>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

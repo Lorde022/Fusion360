@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tischlampe – Werkstattzeichnung, STL, Render · Modul 6, Lektion 3 · Fusion 360 Kurs</title>
+  <meta name="description" content="Finaler Schritt: Werkstattzeichnung, BOM, DXF für den Holzfuß, STL für Druckteile und ein Rendering der fertigen Tischlampe." />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../../index.html">
+        <span class="brand__mark" aria-hidden="true">🔧</span>
+        <span class="brand__text">Fusion&nbsp;360 · Kurs</span>
+      </a>
+      <div class="site-header__tools">
+        <button class="theme-toggle" type="button" aria-label="Farbschema umschalten" data-theme-toggle>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="lesson-shell" id="main">
+    <aside class="lesson-nav" id="lesson-nav" aria-label="Kursnavigation"></aside>
+
+    <article class="lesson"
+             data-lesson="finalisierung"
+             data-module="6-abschlussprojekt"
+             data-lesson-index="3">
+      <p class="lesson__breadcrumb">
+        <a href="../../index.html">Übersicht</a> ›
+        <span data-bc-module>Modul 6</span> ›
+        Lektion 3
+      </p>
+      <h1 class="lesson__title">Tischlampe: Werkstattzeichnung, Export und Rendering</h1>
+      <p class="lesson__meta">
+        <span>⏱ 50 Minuten</span>
+        <span>🎯 Kurs-Abschluss</span>
+        <span>📦 Lieferpaket</span>
+      </p>
+
+      <button class="complete-toggle" type="button" data-complete-toggle aria-pressed="false">
+        Als erledigt markieren
+      </button>
+
+      <section aria-labelledby="ziele">
+        <h2 id="ziele">Lernziele</h2>
+        <ul class="objectives">
+          <li>Ich erstelle eine vollständige <strong>Werkstattzeichnung</strong> der Tischlampe mit allen Bauteilen.</li>
+          <li>Ich generiere eine <strong>Stückliste</strong> mit Holz, Druckteilen und Standardteilen.</li>
+          <li>Ich exportiere <strong>DXF</strong> für den Holzfuß und <strong>STL/3MF</strong> für die Druckteile.</li>
+          <li>Ich erzeuge ein einfaches <strong>Rendering</strong> der fertigen Lampe.</li>
+          <li>Ich habe ein vollständiges Liefer-Set: PDF + Stückliste + Druck-Files + Render.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vorwissen">
+        <h2 id="vorwissen">Vorwissen-Check</h2>
+        <details class="qa">
+          <summary>Welcher Workspace erzeugt fotorealistische Bilder?</summary>
+          <div class="qa__body"><em>Render</em>. Du wählst ihn oben links aus dem Workspace-Menü. Cloud-Rendering ist mit Personal-Use-Lizenz eingeschränkt, lokales Rendering geht aber.</div>
+        </details>
+        <details class="qa">
+          <summary>Was muss in eine Stückliste der Lampe?</summary>
+          <div class="qa__body">Holzfuß (mit Maßen), zwei Druckteile (Hals, Schirm), zwei Heat-set-Inserts, zwei M3-Schrauben, eine E27-Fassung, ein Stoffkabel-Komplettset mit Schalter und Stecker, ein LED-Leuchtmittel.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="theorie">
+        <h2 id="theorie">Theorie kompakt</h2>
+
+        <h3>Was gehört ins Liefer-Set?</h3>
+        <ul>
+          <li><strong>Werkstattzeichnung als PDF</strong> – fünf Sheets: Übersicht, Holzfuß, Hals, Schirm, BOM.</li>
+          <li><strong>Stückliste als CSV</strong> – für Materialeinkauf.</li>
+          <li><strong>DXF des Holzfußes</strong> – für CNC-Fräse oder Lasercutter.</li>
+          <li><strong>STL des Halses und Schirms</strong> – für den 3D-Drucker.</li>
+          <li><strong>3MF aller Druckteile zusammen</strong> – als Multi-Component-Druck-Set.</li>
+          <li><strong>Render</strong> – als Vorschau für dich selbst oder Beschenkte.</li>
+        </ul>
+
+        <h3>Render-Workspace in 5 Minuten</h3>
+        <p>
+          Workspace wechseln → <em>Render</em>. Wichtigste Aktionen:
+        </p>
+        <ul>
+          <li><strong>Appearance</strong> finalisieren: alle Components haben in den Modulen 4 und 5 schon Materialien bekommen. Falls nicht: nachholen.</li>
+          <li><strong>Scene Settings</strong>: Hintergrundbeleuchtung (Environment), Helligkeit, Bodenfläche ja/nein.</li>
+          <li><strong>In-Canvas Render</strong>: schnelle Live-Vorschau direkt im Viewport.</li>
+          <li><strong>Render</strong>: ausführliches Bild mit definierter Auflösung. Kann ein paar Minuten dauern.</li>
+          <li><strong>Capture Image</strong>: PNG-Export.</li>
+        </ul>
+
+        <h3>Der Lampe einen letzten Schliff geben</h3>
+        <p>
+          Vor dem finalen Render kannst du noch:
+        </p>
+        <ul>
+          <li>Maserung des Holzfußes ausrichten (Modul 4.1).</li>
+          <li>Den Druckteil mit einer matten oder glänzenden Appearance versehen.</li>
+          <li>Eine LED-Leuchte als kleinen Kugelbody mit „Light Emissive Material" einsetzen.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="uebung">
+        <h2 id="uebung">Geführte Übung</h2>
+
+        <h3>Werkstattzeichnung</h3>
+        <ol class="steps">
+          <li>
+            <strong>Drawing erstellen.</strong> Tischlampe-Datei → Workspace → Drawing → From Design. ISO, A3 Landscape.
+          </li>
+          <li>
+            <strong>Sheet 1 – Übersicht.</strong> Iso-Ansicht der ganzen Baugruppe. Außenmaße (Höhe, Fußbreite, Halsdurchmesser). Schriftfeld ausfüllen.
+          </li>
+          <li>
+            <strong>Sheet 2 – Holzfuß.</strong> Front, Top und Seite. Section View entlang der Mittelachse, damit Sackbohrung und Kabelkanal sichtbar sind. Bemaßung aller Bohrungen mit ⌀ und Tiefen.
+          </li>
+          <li>
+            <strong>Sheet 3 – Hals (Druckteil).</strong> Front, Section, Top. Bemaßung Höhen, Durchmesser, Heat-set-Sitze, Fassungsbohrung.
+          </li>
+          <li>
+            <strong>Sheet 4 – Schirm.</strong> Front + Section. Bemaßung Konushöhe, Durchmesser unten/oben, Wandstärke.
+          </li>
+          <li>
+            <strong>Sheet 5 – BOM und Iso.</strong>
+            BOM-Tabelle einfügen. Spalten: Item, Qty, Part Number, Description, Material, Maße, Verfahren („Säge", „3D-Druck", „Kauf").
+            Balloons in der Iso-Ansicht.
+          </li>
+          <li>
+            <strong>PDF exportieren.</strong> Output → Output PDF → alle Sheets.
+          </li>
+          <li>
+            <strong>BOM exportieren.</strong> Tabelle rechtsklicken → Export → CSV.
+          </li>
+        </ol>
+
+        <h3>DXF und STL</h3>
+        <ol class="steps">
+          <li>
+            <strong>DXF des Holzfußes.</strong>
+            Wechsle in den Design-Workspace. Klicke auf die Oberseite des Holzfußes → Create Sketch → Project der Außenkontur und der Bohrungspositionen.
+            Skizze schließen, im Browser rechtsklicken → Save as DXF. Speichern als <code>Tischlampe-Fuss.dxf</code>.
+            <div class="callout">
+              <strong>Hinweis</strong>
+              Der Holzfuß ist ein 3D-Bauteil mit Bohrungen unterschiedlicher Tiefe. Eine 2D-DXF zeigt nur die Außenkontur und die Bohrungspositionen – die Tiefen kommen vom Werkstatt-Mitarbeiter aus der PDF-Drawing.
+            </div>
+          </li>
+          <li>
+            <strong>STL für Hals.</strong> Browser-Rechtsklick auf <em>Hals</em> → Save As Mesh → STL Binary, Medium. Speichern.
+          </li>
+          <li>
+            <strong>STL für Schirm.</strong> Gleicher Weg.
+          </li>
+          <li>
+            <strong>3MF mit allen Druckteilen.</strong> File → Export → 3MF. Im Dialog nur die Components <em>Hals</em> und <em>Schirm</em> auswählen.
+            Speichern als <code>Tischlampe-Druckteile.3mf</code>.
+          </li>
+        </ol>
+
+        <h3>Rendering</h3>
+        <ol class="steps">
+          <li>
+            <strong>Workspace wechseln.</strong> Design → Render.
+          </li>
+          <li>
+            <strong>Scene Settings.</strong>
+            Toolbar → <em>Scene Settings</em>. Wähle ein Environment (z.&nbsp;B. <em>Sharp Highlights</em> oder <em>Studio Cool</em>). Ground = on, Position so, dass die Lampe auf einem Boden steht.
+          </li>
+          <li>
+            <strong>Skeleton ausblenden.</strong> Browser → <em>Skeleton</em> Auge aus. Nur reale Bauteile sollen im Render sichtbar sein.
+          </li>
+          <li>
+            <strong>Kamera.</strong> Drehe die Ansicht in eine schöne Iso-Perspektive (leicht von oben, leicht seitlich).
+          </li>
+          <li>
+            <strong>In-Canvas Render starten.</strong> Toolbar → <em>In-Canvas Render</em>. Du siehst live, wie das Bild sich verfeinert.
+          </li>
+          <li>
+            <strong>Capture Image.</strong> Toolbar → <em>Capture Image</em>. Auflösung 1920×1080. Speichern als <code>Tischlampe-Render.png</code>.
+          </li>
+          <li>
+            <strong>Render-Workspace exit.</strong> Zurück in Design.
+          </li>
+        </ol>
+
+        <div class="callout">
+          <strong>Erwartetes Ergebnis</strong>
+          Du hast ein vollständiges Liefer-Set: PDF-Werkstattzeichnung, CSV-Stückliste, DXF des Holzfußes, STL/3MF der Druckteile, ein Render-Bild. Damit könntest du das Projekt an jemanden geben, der es in der Werkstatt fertigt – oder selbst loslegen.
+        </div>
+      </section>
+
+      <section aria-labelledby="transfer">
+        <h2 id="transfer">Freie Transferaufgabe – Eigenes Hybrid-Projekt</h2>
+        <p>
+          Wende den ganzen Kurs jetzt auf ein eigenes Hybrid-Projekt an. Vorschläge:
+        </p>
+        <ul>
+          <li>Ein Wandregal mit gedruckten modularen Halterungen.</li>
+          <li>Eine Werkbank-Klemmenleiste mit gedruckten Klemmen-Kappen.</li>
+          <li>Ein Pflanzentopf-Set mit Holzboden und gedrucktem Innentopf.</li>
+        </ul>
+        <p>
+          <strong>Akzeptanzkriterien:</strong>
+        </p>
+        <ul>
+          <li>Top-Down-Skeleton.</li>
+          <li>Mindestens ein Holz- und ein Druckteil.</li>
+          <li>Verbindung zwischen beiden mit Toleranz.</li>
+          <li>Werkstattzeichnung mit BOM.</li>
+          <li>DXF + STL exportiert.</li>
+          <li>Mindestens ein Render.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="quiz">
+        <h2 id="quiz">Selbstkontroll-Quiz</h2>
+        <details class="qa">
+          <summary>1. Wie viele Sheets hat unsere Lampen-Drawing?</summary>
+          <div class="qa__body">Fünf: Übersicht, Holzfuß, Hals, Schirm, BOM. Du kannst auch zusammenfassen, wenn die Bauteile klein genug sind.</div>
+        </details>
+        <details class="qa">
+          <summary>2. Was bringt ein 3MF zusätzlich zu einzelnen STL-Files?</summary>
+          <div class="qa__body">Es transportiert mehrere Components als ein Set – im Slicer landen Hals und Schirm gleichzeitig auf dem Druckbett, optimal angeordnet.</div>
+        </details>
+        <details class="qa">
+          <summary>3. Warum Skeleton im Render ausblenden?</summary>
+          <div class="qa__body">Sonst werden die Hilfsskizzen-Linien im finalen Bild sichtbar oder ergeben Schattenwürfe.</div>
+        </details>
+        <details class="qa">
+          <summary>4. Was machst du, wenn der Render zu dunkel ist?</summary>
+          <div class="qa__body">Scene Settings → Environment Brightness erhöhen. Oder ein helleres Environment-Preset wählen. Bei Bedarf Position der Lampe relativ zur Sonne anpassen.</div>
+        </details>
+        <details class="qa">
+          <summary>5. Wie übergibst du das Projekt an einen Tischler?</summary>
+          <div class="qa__body">Du gibst ihm das PDF (Sheet 2 für den Holzfuß), die DXF und die CSV-Stückliste. Er weiß damit, was zu sägen, zu bohren und einzufügen ist.</div>
+        </details>
+      </section>
+
+      <section aria-labelledby="cheat">
+        <h2 id="cheat">Cheat Sheet</h2>
+        <div class="cheatsheet">
+          <table>
+            <thead><tr><th>Aktion</th><th>Pfad</th></tr></thead>
+            <tbody>
+              <tr><td>PDF aller Sheets</td><td>Drawing → Output → Output PDF</td></tr>
+              <tr><td>BOM CSV</td><td>BOM-Tabelle → Rechtsklick → Export</td></tr>
+              <tr><td>DXF Holzfuß</td><td>Skizze projizieren → Rechtsklick → Save as DXF</td></tr>
+              <tr><td>STL Druckteile</td><td>Component → Rechtsklick → Save As Mesh</td></tr>
+              <tr><td>3MF aller Druckteile</td><td>File → Export → 3MF, Components wählen</td></tr>
+              <tr><td>Render</td><td>Workspace Render → In-Canvas Render → Capture Image</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Tipps für ein gutes Render</strong></p>
+          <ul>
+            <li>Helles Environment + Studio-Beleuchtung.</li>
+            <li>Kamera leicht von oben, etwa 15–20°.</li>
+            <li>Hintergrund neutral (Studio-Preset).</li>
+            <li>Auflösung mindestens 1920×1080.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="weiter">
+        <h2 id="weiter">Weiterführend</h2>
+        <ul>
+          <li><a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-CC0A4B73-3B82-4181-9B8C-15F9F6B3AAF8" rel="noopener">Autodesk Help: Render Workspace</a></li>
+          <li><a href="https://www.youtube.com/results?search_query=fusion+360+rendering+tutorial" rel="noopener">YouTube: Rendering im Render-Workspace</a></li>
+        </ul>
+      </section>
+
+      <div class="callout callout--note" style="margin-top:1.5rem">
+        <strong>🎉 Kurs abgeschlossen</strong>
+        Du hast jetzt einen kompletten Fusion-Workflow von der ersten Skizze bis zum fertigen Lieferpaket erlebt: parametrisch konstruieren, FDM-gerecht designen, holzwerken-tauglich planen, Baugruppen mit Joints versehen, Drawings, Stücklisten und alle Export-Formate sicher beherrschen.
+        Nutze das Wissen für deine eigenen Werkstattprojekte – und falls du den Kurs für andere zugänglich machen willst, findest du die Deploy-Anleitung im Kursroot unter <a href="../../DEPLOY.md">DEPLOY.md</a>.
+      </div>
+
+      <nav class="lesson__pager" aria-label="Lektionsnavigation" data-pager></nav>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p><a href="../../index.html">← Zur Kursübersicht</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/curriculum.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>
